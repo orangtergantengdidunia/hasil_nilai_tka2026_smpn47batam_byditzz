@@ -1,0 +1,1 @@
+# hasil_nilai_tka2026_smpn47batam_byditzz
