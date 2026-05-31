@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hasil TKA — SMP Negeri 47 Batam 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060912;
+    --surface: #0d1220;
+    --surface2: #131929;
+    --border: rgba(99,179,255,0.12);
+    --accent: #3b82f6;
+    --accent2: #06b6d4;
+    --gold: #f59e0b;
+    --silver: #94a3b8;
+    --bronze: #cd7c3a;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --baik-istimewa: #a855f7;
+    --baik: #22d3ee;
+    --memadai: #4ade80;
+    --kurang: #f87171;
+    --glow: 0 0 40px rgba(59,130,246,0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none; z-index: 0;
+  }
+  .wrap { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── INTRO SPLASH ── */
+  #intro-splash {
+    position: fixed; inset: 0; z-index: 100;
+    background: var(--bg);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0;
+    overflow: hidden;
+  }
+  #intro-splash::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .splash-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.15em;
+    color: var(--accent2); text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+    margin-bottom: 20px;
+  }
+  .splash-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 7vw, 80px);
+    font-weight: 800; line-height: 1.05;
+    text-align: center;
+    background: linear-gradient(135deg, #fff 0%, #93c5fd 50%, #06b6d4 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.4s forwards;
+  }
+  .splash-sub {
+    font-size: 14px; color: var(--muted); margin-top: 16px; text-align: center;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.7s forwards;
+  }
+  .splash-stats {
+    display: flex; gap: 40px; margin-top: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.9s forwards;
+  }
+  .splash-stat { text-align: center; }
+  .splash-stat-val {
+    font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .splash-stat-lbl { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; margin-top: 4px; }
+  .splash-cta {
+    margin-top: 48px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 1.2s forwards;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none; border-radius: 100px;
+    padding: 14px 36px;
+    color: #fff; font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.05em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 32px rgba(59,130,246,0.4);
+  }
+  .splash-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(59,130,246,0.5); }
+  .splash-scroll-hint {
+    margin-top: 16px; font-size: 11px; color: var(--muted);
+    font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 1.5s forwards;
+  }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  /* splash exit */
+  #intro-splash.exiting {
+    animation: splashExit 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
+  }
+  @keyframes splashExit {
+    0%  { opacity:1; transform:translateY(0) scale(1); }
+    40% { opacity:1; transform:translateY(-20px) scale(1.02); }
+    100%{ opacity:0; transform:translateY(-120px) scale(0.96); pointer-events:none; }
+  }
+
+  /* main content hidden until splash gone */
+  #main-content { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  #main-content.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── COMPACT HEADER ── */
+  .compact-header {
+    padding: 32px 0 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+  .compact-header-left { }
+  .compact-title {
+    font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+    background: linear-gradient(135deg, #fff, #93c5fd);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .compact-sub { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 3px; }
+  .compact-chips { display: flex; gap: 16px; flex-wrap: wrap; }
+  .compact-chip {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.06em;
+    color: var(--muted); display: flex; align-items: center; gap: 6px;
+  }
+  .compact-chip b { color: var(--accent2); }
+
+  /* ── SEARCH SECTION (top) ── */
+  .search-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    box-shadow: var(--glow);
+  }
+  .search-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px; font-weight: 700;
+    color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.1em; margin-bottom: 14px;
+  }
+  .search-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .search-box { flex: 1; min-width: 200px; position: relative; }
+  .search-box svg {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    width: 16px; height: 16px; color: var(--muted); pointer-events: none;
+  }
+  .search-box input {
+    width: 100%; background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px 40px 12px 42px; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .search-box input:focus {
+    border-color: rgba(59,130,246,0.5);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+  }
+  .search-box input::placeholder { color: var(--muted); }
+  .search-clear-btn {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%; width: 20px; height: 20px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 10px; cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    line-height: 1; padding: 0;
+  }
+  .search-clear-btn:hover {
+    background: rgba(248,113,113,0.2); border-color: rgba(248,113,113,0.4);
+    color: var(--kurang);
+  }
+  .filter-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .filter-btn {
+    padding: 5px 14px; border-radius: 100px;
+    font-size: 11px; font-family: 'DM Mono', monospace;
+    cursor: pointer; border: 1px solid var(--border);
+    background: transparent; color: var(--muted);
+    transition: all 0.2s; letter-spacing: 0.03em; white-space: nowrap;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.4); color: var(--accent);
+  }
+  .filter-btn.f-baik-istimewa.active { background: rgba(168,85,247,0.15); border-color: rgba(168,85,247,0.4); color: var(--baik-istimewa); }
+  .filter-btn.f-baik.active { background: rgba(6,182,212,0.15); border-color: rgba(6,182,212,0.4); color: var(--baik); }
+  .filter-btn.f-memadai.active { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.3); color: var(--memadai); }
+  .filter-btn.f-kurang.active { background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.3); color: var(--kurang); }
+  .result-count { font-size: 11px; color: var(--muted); margin-top: 10px; font-family: 'DM Mono', monospace; }
+  .result-count b { color: var(--accent2); }
+  .search-compare-hint {
+    margin-top: 12px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 10px 14px;
+    background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 10px; font-size: 12px; color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+  .compare-quick-btn {
+    margin-left: auto; padding: 6px 14px; border-radius: 100px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none; color: #fff; font-family: 'Syne', sans-serif;
+    font-size: 12px; font-weight: 700; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(59,130,246,0.35);
+  }
+  .compare-quick-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,0.45); }
+  .compare-quick-btn-sm {
+    padding: 4px 12px; border-radius: 100px;
+    background: transparent; border: 1px solid rgba(59,130,246,0.4);
+    color: var(--accent); font-family: 'DM Mono', monospace;
+    font-size: 11px; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .compare-quick-btn-sm:hover { background: rgba(59,130,246,0.15); }
+
+  /* ── SEARCH RESULT CARD (MODAL) ── */
+  #search-result-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 200;
+    background: rgba(0,0,0,0.75);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  #search-result-overlay.open { display: block; }
+  .modal-center-wrap {
+    min-height: 100%;
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding: 20px 16px;
+    box-sizing: border-box;
+  }
+  #search-result-card {
+    background: var(--surface);
+    border: 1px solid rgba(99,179,255,0.2);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 420px;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    animation: modalIn 0.28s cubic-bezier(0.34,1.4,0.64,1);
+    flex-shrink: 0;
+    position: relative;
+  }
+  @keyframes modalIn { from{opacity:0;transform:scale(0.93)} to{opacity:1;transform:scale(1)} }
+
+  .src-modal-header {
+    background: var(--surface2);
+    padding: 12px 14px 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    border-radius: 20px 20px 0 0;
+  }
+  .src-modal-header::before { display: none; }
+  .src-modal-close {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%; width: 26px; height: 26px; min-width: 26px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 12px; cursor: pointer;
+    transition: all 0.15s; flex-shrink: 0;
+  }
+  .src-modal-close:hover { background: rgba(248,113,113,0.2); border-color: rgba(248,113,113,0.4); color: var(--kurang); }
+  .src-modal-body { padding: 12px 14px 14px; }
+  #search-result-card h3 {
+    font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 1px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .result-nisn { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 0; }
+  .result-scores { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .score-block {
+    background: var(--surface2); border-radius: 12px; padding: 10px 12px;
+    border: 1px solid var(--border); min-width: 0;
+  }
+  .score-block-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; font-family: 'DM Mono', monospace; }
+  .score-block-value {
+    font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800;
+    line-height: 1; white-space: nowrap;
+  }
+  .score-block-cat { font-size: 10px; margin-top: 3px; }
+  .result-avg-row {
+    margin-top: 8px;
+    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(6,182,212,0.07));
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 12px; padding: 9px 12px;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .result-avg-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-family: 'DM Mono', monospace; }
+  .result-avg-value { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; flex-shrink: 0; }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex; gap: 4px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 4px;
+    margin-bottom: 20px; width: 100%;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    padding: 9px 14px; border-radius: 10px;
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.04em; cursor: pointer; border: none;
+    background: transparent; color: var(--muted);
+    transition: all 0.2s; text-transform: uppercase;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .tab.active { background: var(--accent); color: #fff; box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+  .tab.tab-lb.active { background: linear-gradient(135deg, var(--gold), #fbbf24); color: #000; box-shadow: 0 4px 12px rgba(245,158,11,0.4); }
+
+  /* ── STATS MINI ROW ── */
+  .stats-mini {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px; margin-bottom: 20px;
+  }
+  .stat-mini-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px 14px;
+    position: relative; overflow: hidden;
+  }
+  .stat-mini-card::after {
+    content:''; position:absolute; top:0;left:0;right:0;height:2px;
+    background: linear-gradient(90deg,var(--accent),var(--accent2)); opacity:.6;
+  }
+  .stat-mini-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; font-family: 'DM Mono', monospace; }
+  .stat-mini-value { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: #fff; line-height: 1; }
+  .stat-mini-sub { font-size: 11px; color: var(--muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; overflow: hidden; margin-bottom: 20px;
+  }
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; }
+  thead { background: var(--surface2); }
+  th {
+    padding: 12px 14px;
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
+    text-align: left; font-weight: 500;
+    border-bottom: 1px solid var(--border); white-space: nowrap;
+  }
+  th.sortable { cursor: pointer; user-select: none; }
+  th.sortable:hover { color: var(--accent2); }
+  th.sorted { color: var(--accent2); }
+  .sort-arrow { margin-left: 4px; opacity: 0.5; }
+  td {
+    padding: 11px 14px; font-size: 13px;
+    border-bottom: 1px solid rgba(99,179,255,0.05);
+    vertical-align: middle; white-space: nowrap;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr { transition: background 0.15s; }
+  tr:hover td { background: rgba(59,130,246,0.04); }
+
+  .no-cell { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+  .name-cell { font-weight: 500; white-space: normal; min-width: 160px; }
+  .nisn-cell { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+  .score-num { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; }
+
+  .cat-badge {
+    display: inline-block; padding: 2px 8px; border-radius: 100px;
+    font-size: 10px; font-family: 'DM Mono', monospace; font-weight: 500;
+    letter-spacing: 0.03em; vertical-align: middle;
+  }
+  .cat-Baik-Istimewa { background: rgba(168,85,247,0.15); color: var(--baik-istimewa); border: 1px solid rgba(168,85,247,0.3); }
+  .cat-Baik { background: rgba(6,182,212,0.12); color: var(--baik); border: 1px solid rgba(6,182,212,0.25); }
+  .cat-Memadai { background: rgba(74,222,128,0.08); color: var(--memadai); border: 1px solid rgba(74,222,128,0.2); }
+  .cat-Kurang { background: rgba(248,113,113,0.08); color: var(--kurang); border: 1px solid rgba(248,113,113,0.2); }
+
+  /* ── LEADERBOARD ── */
+  #leaderboard-section { display: none; }
+  .lb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .lb-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+  .lb-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 18px 20px; border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+  .lb-icon { font-size: 18px; }
+  .lb-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; }
+  .lb-sub { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .lb-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 20px; border-bottom: 1px solid rgba(99,179,255,0.04);
+    transition: background 0.15s;
+  }
+  .lb-item:last-child { border-bottom: none; }
+  .lb-item:hover { background: rgba(59,130,246,0.04); }
+  .lb-rank {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 800; flex-shrink: 0;
+  }
+  .rank-1 { background: linear-gradient(135deg,#f59e0b,#fbbf24); color:#000; box-shadow:0 4px 12px rgba(245,158,11,0.4); }
+  .rank-2 { background: linear-gradient(135deg,#94a3b8,#cbd5e1); color:#000; box-shadow:0 4px 12px rgba(148,163,184,0.3); }
+  .rank-3 { background: linear-gradient(135deg,#cd7c3a,#f59e0b); color:#000; box-shadow:0 4px 12px rgba(205,124,58,0.3); }
+  .rank-n { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+  .lb-info { flex: 1; min-width: 0; }
+  .lb-name { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lb-detail { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 2px; }
+  .lb-score { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; flex-shrink: 0; }
+  .lb-score.gold { color: var(--gold); }
+  .lb-score.silver { color: var(--silver); }
+  .lb-score.bronze { color: var(--bronze); }
+
+  .src-lb-ranks {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 8px;
+  }
+  .src-lb-rank-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 8px 6px;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; gap: 2px;
+    transition: border-color 0.2s; overflow: hidden;
+  }
+  .src-lb-rank-card.rank-top1  { border-color: rgba(245,158,11,0.5);  background: rgba(245,158,11,0.07); }
+  .src-lb-rank-card.rank-top3  { border-color: rgba(205,124,58,0.45); background: rgba(205,124,58,0.07); }
+  .src-lb-rank-card.rank-top10 { border-color: rgba(6,182,212,0.35);  background: rgba(6,182,212,0.06);  }
+  .src-lb-rank-icon { display: none; }
+  .src-lb-rank-body { min-width: 0; width: 100%; }
+  .src-lb-rank-label { font-family: 'DM Mono', monospace; font-size: 7.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.3; white-space: normal; text-align: center; }
+  .src-lb-rank-num {
+    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; line-height: 1; text-align: center; display: block;
+  }
+  .src-lb-rank-num.gold   { color: var(--gold); }
+  .src-lb-rank-num.silver { color: var(--silver); }
+  .src-lb-rank-num.bronze { color: var(--bronze); }
+  .src-lb-rank-num.baik   { color: var(--baik); }
+  .src-lb-rank-num.normal { color: var(--text); }
+  .src-lb-rank-sub { font-size: 8px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 0; }
+
+  /* ── LB SEARCH / PAGINATION ── */
+  .lb-search-wrap {
+    padding: 12px 16px 0;
+    position: relative;
+  }
+  .lb-search-input {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 9px 36px 9px 14px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .lb-search-input:focus {
+    border-color: rgba(59,130,246,0.5);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+  }
+  .lb-search-input::placeholder { color: var(--muted); }
+  .lb-clear-btn {
+    position: absolute; right: 26px; top: 50%; transform: translateY(-20%);
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%; width: 20px; height: 20px;
+    display: none; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 10px; cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    line-height: 1; padding: 0;
+  }
+  .lb-clear-btn:hover {
+    background: rgba(248,113,113,0.2); border-color: rgba(248,113,113,0.4);
+    color: var(--kurang);
+  }
+  .lb-pag {
+    display: flex; justify-content: center; align-items: center;
+    gap: 4px; padding: 12px 16px; flex-wrap: wrap;
+    border-top: 1px solid var(--border);
+  }
+  .lb-empty {
+    text-align: center; padding: 30px 20px;
+    color: var(--muted); font-size: 13px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── DIST CHART ── */
+  .dist-section {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 20px; margin-bottom: 20px;
+  }
+  .dist-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 16px; }
+  .dist-bars { display: flex; gap: 12px; align-items: flex-end; height: 100px; }
+  .dist-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .dist-bar { width: 100%; border-radius: 6px 6px 0 0; transition: height 0.8s cubic-bezier(0.34,1.56,0.64,1); min-height: 4px; }
+  .dist-bar.bi    { background: linear-gradient(180deg,var(--baik-istimewa),rgba(168,85,247,0.4)); }
+  .dist-bar.baik  { background: linear-gradient(180deg,var(--baik),rgba(6,182,212,0.4)); }
+  .dist-bar.memadai { background: linear-gradient(180deg,var(--memadai),rgba(74,222,128,0.4)); }
+  .dist-bar.kurang  { background: linear-gradient(180deg,var(--kurang),rgba(248,113,113,0.4)); }
+  .dist-label { font-size: 9px; color: var(--muted); font-family: 'DM Mono', monospace; text-align: center; }
+  .dist-count { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800; }
+
+  /* ── PAGINATION ── */
+  .pag { display: flex; justify-content: center; align-items: center; gap: 6px; padding: 16px 0; flex-wrap: wrap; }
+  .pag-btn {
+    width: 34px; height: 34px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    cursor: pointer; border: 1px solid var(--border);
+    background: var(--surface); color: var(--muted); transition: all 0.15s;
+  }
+  .pag-btn:hover { border-color: rgba(59,130,246,0.4); color: var(--accent); }
+  .pag-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+  .pag-btn.disabled { opacity: 0.3; pointer-events: none; }
+  .pag-info { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); padding: 0 6px; }
+
+  /* empty state */
+  .empty-state { text-align: center; padding: 50px 20px; color: var(--muted); }
+  .empty-state svg { width: 40px; height: 40px; margin-bottom: 10px; opacity: 0.3; }
+  .empty-state p { font-size: 13px; }
+
+  /* ── NAME PICKER ── */
+  #name-picker {
+    display: none;
+    background: var(--surface);
+    border: 1px solid rgba(59,130,246,0.35);
+    border-radius: 16px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    animation: slideIn 0.25s ease;
+  }
+  .picker-header {
+    padding: 12px 18px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    font-size: 11px; font-family: 'DM Mono', monospace;
+    color: var(--muted); letter-spacing: 0.05em;
+  }
+  .picker-header b { color: var(--accent2); }
+  .picker-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 18px;
+    border-bottom: 1px solid rgba(99,179,255,0.05);
+    cursor: pointer; transition: background 0.15s;
+  }
+  .picker-item:last-child { border-bottom: none; }
+  .picker-item:hover { background: rgba(59,130,246,0.08); }
+  .picker-item.selected { background: rgba(59,130,246,0.12); }
+  .picker-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800;
+    color: #fff; flex-shrink: 0;
+  }
+  .picker-name { font-size: 13px; font-weight: 500; }
+  .picker-meta { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 2px; }
+  .picker-score {
+    margin-left: auto; text-align: right; flex-shrink: 0;
+  }
+  .picker-score-val { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; }
+  .picker-score-lbl { font-size: 9px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+  /* footer space */
+  .footer-space { height: 60px; }
+
+  @media (max-width: 640px) {
+    .stats-mini { grid-template-columns: 1fr 1fr; }
+    .result-scores { grid-template-columns: 1fr 1fr; }
+    .score-block-value { font-size: 22px; }
+    .lb-grid { grid-template-columns: 1fr; }
+    .splash-stats { gap: 24px; flex-wrap: wrap; justify-content: center; }
+    .splash-stat-val { font-size: 28px; }
+  }
+  /* removed: max-width 400px single-column override — keep 2 cols always */
+
+  /* ── COMPARE SECTION ── */
+  #compare-section { display: none; }
+  .compare-intro {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; padding: 24px 28px; margin-bottom: 20px;
+  }
+  .compare-intro-title {
+    font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .compare-intro-sub { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .compare-search-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px;
+  }
+  @media (max-width: 600px) { .compare-search-grid { grid-template-columns: 1fr; } }
+  .cmp-slots-2, .cmp-slots-3, .cmp-slots-4 { grid-template-columns: 1fr; }
+  @media (max-width: 600px) {
+    .cmp-slots-2, .cmp-slots-3, .cmp-slots-4 { grid-template-columns: 1fr; }
+  }
+  .compare-slot {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px;
+  }
+  .compare-slot-label {
+    font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .compare-slot-label .dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .dot-a { background: var(--accent); box-shadow: 0 0 6px rgba(59,130,246,0.6); }
+  .dot-b { background: #f472b6; box-shadow: 0 0 6px rgba(244,114,182,0.6); }
+  .compare-input-wrap { position: relative; }
+  .compare-input-wrap svg {
+    position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+    width: 14px; height: 14px; color: var(--muted); pointer-events: none;
+  }
+  .compare-input {
+    width: 100%; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 12px 10px 36px;
+    color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 13px;
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .compare-input:focus { border-color: rgba(59,130,246,0.5); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+  .compare-input::placeholder { color: var(--muted); }
+  .compare-dropdown {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+    background: var(--surface); border: 1px solid rgba(59,130,246,0.3);
+    border-radius: 12px; overflow: hidden; z-index: 50;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    display: none; max-height: 200px; overflow-y: auto;
+  }
+  .compare-dropdown.open { display: block; }
+  .compare-dd-item {
+    padding: 10px 14px; font-size: 13px; cursor: pointer;
+    border-bottom: 1px solid rgba(99,179,255,0.04);
+    transition: background 0.1s; display: flex; align-items: center; gap: 10px;
+  }
+  .compare-dd-item:last-child { border-bottom: none; }
+  .compare-dd-item:hover { background: rgba(59,130,246,0.08); }
+  .compare-dd-avatar {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 800; flex-shrink: 0;
+  }
+  .compare-dd-avatar.a { background: linear-gradient(135deg, var(--accent), var(--accent2)); color:#fff; }
+  .compare-dd-avatar.b { background: linear-gradient(135deg, #f472b6, #e879f9); color:#fff; }
+  .compare-dd-info { flex:1; min-width:0; }
+  .compare-dd-name { font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .compare-dd-meta { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .compare-dd-score { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; flex-shrink:0; }
+  .compare-selected-tag {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 8px 12px; margin-top: 8px;
+    font-size: 12px; font-weight: 500;
+  }
+  .compare-selected-tag .remove-btn {
+    margin-left: auto; cursor: pointer; color: var(--muted);
+    font-size: 14px; line-height: 1; transition: color 0.15s;
+  }
+  .compare-selected-tag .remove-btn:hover { color: var(--kurang); }
+
+  /* Result panel */
+  #compare-result {
+    display: none;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; overflow: hidden; margin-bottom: 20px;
+  }
+  .cmp-header {
+    background: var(--surface2); padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
+  }
+  .cmp-players {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .cmp-player {
+    padding: 24px 24px; text-align: center;
+    border-right: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .cmp-player::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .cmp-player:first-child::before {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .cmp-player:last-child::before {
+    background: linear-gradient(90deg, #f472b6, #e879f9);
+  }
+  .cmp-player:last-child { border-right: none; }
+  .cmp-player-avatar {
+    width: 48px; height: 48px; border-radius: 50%; margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
+    color: #fff;
+  }
+  .cmp-player-avatar.a { background: linear-gradient(135deg, var(--accent), var(--accent2)); box-shadow: 0 4px 16px rgba(59,130,246,0.4); }
+  .cmp-player-avatar.b { background: linear-gradient(135deg, #f472b6, #e879f9); box-shadow: 0 4px 16px rgba(244,114,182,0.4); }
+  .cmp-player-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; line-height: 1.3; }
+  .cmp-player-meta { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 3px; }
+  .cmp-player-rank {
+    display: inline-block; padding: 2px 8px; border-radius: 100px;
+    font-size: 10px; font-family: 'DM Mono', monospace; margin-top: 6px;
+  }
+  .cmp-winner-badge {
+    position: absolute; top: 10px; right: 10px;
+    background: linear-gradient(135deg, var(--gold), #fbbf24);
+    color: #000; font-size: 9px; font-family: 'DM Mono', monospace;
+    padding: 2px 7px; border-radius: 100px; font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  
+  .cmp-summary {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    background: rgba(0,0,0,0.1);
+    font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace;
+    display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+  }
+  .cmp-summary-item { display: flex; align-items: center; gap: 5px; }
+  .cmp-summary-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Percentile bar */
+  .cmp-percentile-wrap { padding: 16px 24px; border-top: 1px solid var(--border); }
+  .cmp-percentile-title { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; margin-bottom: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .pct-bar-container { position: relative; height: 32px; background: rgba(255,255,255,0.03); border-radius: 100px; overflow: hidden; margin-bottom: 8px; }
+  .pct-bar-bg { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(248,113,113,0.3) 0%, rgba(74,222,128,0.3) 50%, rgba(6,182,212,0.3) 100%); }
+  .pct-marker {
+    position: absolute; top: 50%; transform: translate(-50%, -50%);
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 2px solid var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 800; font-family: 'Syne', sans-serif;
+    transition: left 0.8s cubic-bezier(0.34,1.56,0.64,1);
+    z-index: 2;
+  }
+  .pct-marker.a { background: var(--accent); box-shadow: 0 2px 8px rgba(59,130,246,0.5); }
+  .pct-marker.b { background: #f472b6; box-shadow: 0 2px 8px rgba(244,114,182,0.5); }
+  .pct-labels { display: flex; justify-content: space-between; font-size: 9px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .cmp-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
+  .cmp-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .cmp-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* ── PIE DONUT ROW ── */
+  .cmp-pie-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(15,22,40,0.8) 0%, var(--surface2) 100%);
+  }
+  .cmp-pie-card {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 28px 16px 24px; position: relative;
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .cmp-pie-card:hover { background: rgba(59,130,246,0.04); }
+  .cmp-pie-card:last-child { border-right: none; }
+  .cmp-pie-label {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--muted); margin-bottom: 16px; text-align: center;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    padding: 3px 10px; border-radius: 100px;
+  }
+  .cmp-pie-svg { position: relative; width: 110px; height: 110px; flex-shrink: 0; padding: 5px; }
+  .cmp-pie-svg svg { width: 100px; height: 100px; transform: rotate(-90deg); display: block; overflow: visible; filter: drop-shadow(0 0 6px rgba(59,130,246,0.25)); }
+  .cmp-pie-center {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; pointer-events: none;
+  }
+  .cmp-pie-winner-score {
+    font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; line-height: 1;
+  }
+  .cmp-pie-center { display: none; }
+  .cmp-pie-winner-label { font-size: 8px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 3px; max-width: 70px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cmp-pie-scores {
+    margin-top: 14px; display: flex; gap: 10px; width: 100%; justify-content: center; align-items: center; flex-wrap: wrap;
+  }
+  .cmp-pie-score-item { text-align: center; min-width: 0; max-width: 80px; }
+  .cmp-pie-score-val { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; }
+  .cmp-pie-score-who { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--muted); margin-top: 3px; white-space: normal; word-break: break-word; line-height: 1.3; }
+  .cmp-pie-vs {
+    color: var(--muted); font-size: 10px; align-self: center; font-family: 'DM Mono', monospace;
+    background: rgba(255,255,255,0.04); width: 24px; height: 24px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; border: 1px solid rgba(255,255,255,0.08);
+  }
+  .cmp-pie-tie-badge {
+    font-family: 'DM Mono', monospace; font-size: 9px; color: var(--gold);
+    background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3);
+    padding: 2px 8px; border-radius: 100px; margin-top: 8px;
+  }
+
+  /* ── ENHANCED COMPARE SCORE ROWS ── */
+  .cmp-rows { }
+  .cmp-row {
+    display: grid; grid-template-columns: 1fr 100px 1fr;
+    border-bottom: 1px solid rgba(99,179,255,0.06);
+    align-items: stretch; position: relative;
+  }
+  .cmp-row:last-child { border-bottom: none; }
+  .cmp-row-label {
+    text-align: center; padding: 16px 8px;
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
+    background: rgba(0,0,0,0.15);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px; z-index: 1;
+  }
+  .cmp-val {
+    padding: 16px 20px; text-align: center;
+    font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px; transition: background 0.2s;
+  }
+  .cmp-val.winner {
+    background: rgba(59,130,246,0.06);
+    box-shadow: inset 2px 0 0 rgba(59,130,246,0.3);
+  }
+  .cmp-val.winner-b {
+    background: rgba(244,114,182,0.06);
+    box-shadow: inset -2px 0 0 rgba(244,114,182,0.3);
+  }
+  .cmp-val-sub { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); font-weight: 400; }
+  .cmp-bar-visual {
+    width: 80%; height: 3px; border-radius: 100px;
+    background: rgba(255,255,255,0.04);
+    position: relative;
+  }
+  .cmp-bar-fill {
+    height: 100%; border-radius: 100px;
+    transition: width 1s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  /* ── COMPARE INSIGHT BOX ── */
+  .cmp-insight-box {
+    margin: 0; padding: 18px 24px;
+    background: linear-gradient(135deg, rgba(59,130,246,0.07), rgba(6,182,212,0.04));
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .cmp-insight-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 12px 14px; text-align: center;
+  }
+  .cmp-insight-label { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .cmp-insight-val { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800; word-break: break-word; line-height: 1.3; }
+
+  @media (max-width: 480px) {
+    .cmp-pie-row { grid-template-columns: 1fr; }
+    .cmp-pie-card { border-right: none; border-bottom: 1px solid var(--border); }
+    .cmp-pie-card:last-child { border-bottom: none; }
+    .cmp-row { grid-template-columns: 1fr 72px 1fr; }
+    .cmp-val { font-size: 18px; padding: 12px 10px; }
+  }
+  #cmp-rows { overflow-x: auto; }
+  #cmp-players-row { overflow-x: hidden; }
+
+  .lb-detail-btn {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── INTRO SPLASH ── -->
+<div id="intro-splash">
+  <div class="splash-badge" id="splash-badge">TKA SMP/MTS · 2026 · Kepulauan Riau</div>
+  <div class="splash-title">Hasil Tes<br>Kemampuan Akademik</div>
+  <div class="splash-sub">SMP Negeri 47 Batam &nbsp;·&nbsp; NPSN 69757225 &nbsp;·&nbsp; Kota Batam</div>
+  <div class="splash-stats">
+    <div class="splash-stat">
+      <div class="splash-stat-val" id="sp-total">331</div>
+      <div class="splash-stat-lbl">Total Peserta</div>
+    </div>
+    <div class="splash-stat">
+      <div class="splash-stat-val" id="sp-mtk">—</div>
+      <div class="splash-stat-lbl">Rata-rata MTK</div>
+    </div>
+    <div class="splash-stat">
+      <div class="splash-stat-val" id="sp-bi">—</div>
+      <div class="splash-stat-lbl">Rata-rata BI</div>
+    </div>
+    <div class="splash-stat">
+      <div class="splash-stat-val" id="sp-avg">—</div>
+      <div class="splash-stat-lbl">Rata-rata Gabungan</div>
+    </div>
+  </div>
+  <button class="splash-cta" id="splash-cta" onclick="exitSplash()">Lihat Hasil &amp; Cari Siswa →</button>
+  <div class="splash-scroll-hint">atau geser ke bawah</div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div id="main-content">
+<div class="wrap">
+
+  <!-- Compact header -->
+  <div class="compact-header">
+    <div class="compact-header-left">
+      <div class="compact-title">Hasil TKA 2026 — SMPN 47 Batam</div>
+      <div class="compact-sub">NPSN 69757225 &nbsp;·&nbsp; Kepala Sekolah: PESRA DARYANTI, S.Pd., M.M.</div>
+    </div>
+    <div class="compact-chips">
+      <div class="compact-chip">Total Peserta <b id="total-count">—</b></div>
+      <div class="compact-chip">Rata-rata MTK <b id="avg-mtk">—</b></div>
+      <div class="compact-chip">Rata-rata BI <b id="avg-bi">—</b></div>
+      <div class="compact-chip">Rata-rata Gabungan <b id="avg-all">—</b></div>
+    </div>
+  </div>
+
+  <!-- SEARCH (TOP) -->
+  <div class="search-section">
+    <div class="search-title">🔍 Cari Peserta</div>
+    <div class="search-row">
+      <div class="search-box">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="search-name" placeholder="Cari nama atau NISN..." autocomplete="off">
+        <button class="search-clear-btn" id="clear-name" onclick="clearSearch('name')" style="display:none" title="Hapus">✕</button>
+      </div>
+      <div class="search-box" style="max-width:180px">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        <input type="text" id="search-nomor" placeholder="No. Peserta..." autocomplete="off">
+        <button class="search-clear-btn" id="clear-nomor" onclick="clearSearch('nomor')" style="display:none" title="Hapus">✕</button>
+      </div>
+      <button class="compare-quick-btn" onclick="goCompare()" style="flex-shrink:0">⚔️ Bandingkan</button>
+    </div>
+    <div class="search-compare-hint" id="search-compare-hint" style="display:none">
+      <span id="compare-hint-text"></span>
+      <button class="compare-quick-btn-sm" id="compare-quick-btn" onclick="goToCompare()">Isi ke slot A →</button>
+    </div>
+    <div class="result-count" id="result-count"></div>
+  </div>
+
+  <!-- NAME PICKER -->
+  <div id="name-picker"></div>
+
+  <!-- SEARCH RESULT MODAL -->
+  <div id="search-result-overlay" onclick="closeDetailModal(event)">
+    <div class="modal-center-wrap">
+      <div id="search-result-card" onclick="event.stopPropagation()">
+      <div class="src-modal-header">
+        <div>
+          <h3 id="src-name"></h3>
+          <div class="result-nisn" id="src-info"></div>
+        </div>
+        <button class="src-modal-close" onclick="closeDetailModal()">✕</button>
+      </div>
+      <div class="src-modal-body">
+        <div class="result-scores">
+          <div class="score-block">
+            <div class="score-block-label">Matematika</div>
+            <div class="score-block-value" id="src-mtk"></div>
+            <div class="score-block-cat" id="src-mtk-cat"></div>
+          </div>
+          <div class="score-block">
+            <div class="score-block-label">Bahasa Indonesia</div>
+            <div class="score-block-value" id="src-bi"></div>
+            <div class="score-block-cat" id="src-bi-cat"></div>
+          </div>
+        </div>
+        <div class="result-avg-row" style="margin-bottom:8px">
+          <div>
+            <div class="result-avg-label">📊 Rata-rata (MTK + BI) / 2</div>
+          </div>
+          <div class="result-avg-value" id="src-avg"></div>
+        </div>
+        <div class="result-avg-row">
+          <div>
+            <div class="result-avg-label">⭐ Jumlah TKA (MTK + BI)</div>
+            <div style="font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:3px" id="src-rank-info"></div>
+          </div>
+          <div class="result-avg-value" id="src-total"></div>
+        </div>
+        <div class="src-lb-ranks" id="src-lb-ranks"></div>
+      </div>
+    </div><!-- /#search-result-card -->
+    </div><!-- /.modal-center-wrap -->
+  </div><!-- /#search-result-overlay -->
+
+  <!-- TABS -->
+  <div class="tabs" id="tabs-bar">
+    <button class="tab active" id="tab-data" onclick="showTab('data')">📋 Data Peserta</button>
+    <button class="tab" id="tab-compare" onclick="showTab('compare')" style="display:none">⚔️ Bandingkan</button>
+    <button class="tab tab-lb" id="tab-lb" onclick="showTab('leaderboard')">🏆 Leaderboard</button>
+    <button class="tab" id="tab-stats" onclick="showTab('stats')">📊 Statistik</button>
+  </div>
+
+  <!-- DATA TABLE -->
+  <div id="data-section">
+    <div class="table-wrap">
+      <div class="table-scroll">
+      <table id="main-table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>NISN</th>
+            <th class="sortable" data-col="name" onclick="sortBy('name')">Nama <span class="sort-arrow">↕</span></th>
+            <th class="sortable" data-col="mtk" onclick="sortBy('mtk')">Matematika <span class="sort-arrow">↕</span></th>
+            <th class="sortable" data-col="bi" onclick="sortBy('bi')">Bhs. Indonesia <span class="sort-arrow">↕</span></th>
+            <th class="sortable" data-col="avg" onclick="sortBy('avg')">Rata-rata <span class="sort-arrow">↕</span></th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+      </div>
+      <div class="empty-state" id="empty-state" style="display:none">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <p>Tidak ada peserta ditemukan</p>
+      </div>
+    </div>
+    <div class="pag" id="pagination"></div>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div id="leaderboard-section">
+    <div class="lb-grid" id="lb-grid"></div>
+  </div>
+
+  <!-- STATS -->
+  <div id="stats-section" style="display:none">
+    <div class="stats-mini" id="stats-mini-grid">
+      <div class="stat-mini-card">
+        <div class="stat-mini-label">Rata-rata Matematika</div>
+        <div class="stat-mini-value" id="sm-avg-mtk">—</div>
+        <div class="stat-mini-sub">dari 100</div>
+      </div>
+      <div class="stat-mini-card">
+        <div class="stat-mini-label">Rata-rata Bhs Indonesia</div>
+        <div class="stat-mini-value" id="sm-avg-bi">—</div>
+        <div class="stat-mini-sub">dari 100</div>
+      </div>
+      <div class="stat-mini-card">
+        <div class="stat-mini-label">Rata-rata Gabungan</div>
+        <div class="stat-mini-value" id="sm-avg-all">—</div>
+        <div class="stat-mini-sub">dari 100</div>
+      </div>
+      <div class="stat-mini-card">
+        <div class="stat-mini-label">Nilai MTK Tertinggi</div>
+        <div class="stat-mini-value" id="sm-max-mtk">—</div>
+        <div class="stat-mini-sub" id="sm-max-mtk-name">—</div>
+      </div>
+      <div class="stat-mini-card">
+        <div class="stat-mini-label">Nilai BI Tertinggi</div>
+        <div class="stat-mini-value" id="sm-max-bi">—</div>
+        <div class="stat-mini-sub" id="sm-max-bi-name">—</div>
+      </div>
+      <div class="stat-mini-card">
+        <div class="stat-mini-label">Peserta Nilai Baik+</div>
+        <div class="stat-mini-value" id="sm-count-baik">—</div>
+        <div class="stat-mini-sub">Baik &amp; Baik Istimewa</div>
+      </div>
+    </div>
+    <div class="dist-section">
+      <div class="dist-title">Distribusi Kategori Nilai (Matematika + Bhs Indonesia)</div>
+      <div class="dist-bars" id="dist-bars">
+        <div class="dist-bar-wrap">
+          <div class="dist-count" id="cnt-bi">—</div>
+          <div class="dist-bar bi" id="bar-bi" style="height:0"></div>
+          <div class="dist-label">Baik<br>Istimewa</div>
+        </div>
+        <div class="dist-bar-wrap">
+          <div class="dist-count" id="cnt-baik">—</div>
+          <div class="dist-bar baik" id="bar-baik" style="height:0"></div>
+          <div class="dist-label">Baik</div>
+        </div>
+        <div class="dist-bar-wrap">
+          <div class="dist-count" id="cnt-memadai">—</div>
+          <div class="dist-bar memadai" id="bar-memadai" style="height:0"></div>
+          <div class="dist-label">Memadai</div>
+        </div>
+        <div class="dist-bar-wrap">
+          <div class="dist-count" id="cnt-kurang">—</div>
+          <div class="dist-bar kurang" id="bar-kurang" style="height:0"></div>
+          <div class="dist-label">Kurang</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-space"></div>
+
+  <!-- COMPARE SECTION -->
+  <div id="compare-section">
+    <div class="compare-intro">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px">
+        <div class="compare-intro-title">⚔️ Bandingkan Nilai Siswa (2–4 Siswa)</div>
+        <button onclick="showTab('data')" style="background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);font-size:16px;flex-shrink:0;transition:all 0.2s" onmouseover="this.style.background='rgba(248,113,113,0.15)';this.style.color='var(--kurang)';this.style.borderColor='rgba(248,113,113,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">✕</button>
+      </div>
+      <div class="compare-intro-sub">Pilih 2 hingga 4 siswa untuk dibandingkan nilai mereka secara lengkap</div>
+      <div id="compare-slots-grid" class="compare-search-grid" style="grid-template-columns:1fr 1fr;"></div>
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <button id="add-slot-btn" onclick="addCmpSlot()" style="padding:7px 16px;border-radius:100px;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.35);color:var(--accent);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(59,130,246,0.25)'" onmouseout="this.style.background='rgba(59,130,246,0.12)'">+ Tambah Siswa</button>
+        <button onclick="clearAllCmp()" style="padding:7px 16px;border-radius:100px;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.25);color:var(--kurang);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(248,113,113,0.2)'" onmouseout="this.style.background='rgba(248,113,113,0.08)'">✕ Reset Semua</button>
+        <button onclick="runCompareBtn()" id="run-compare-btn" style="padding:7px 20px;border-radius:100px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#fff;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 16px rgba(59,130,246,0.35)" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 6px 20px rgba(59,130,246,0.5)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(59,130,246,0.35)'">⚔️ Bandingkan</button>
+        <span id="cmp-slot-count-hint" style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;"></span>
+      </div>
+    </div>
+
+    <!-- Compare Result -->
+    <div id="compare-result">
+      <!-- Header -->
+      <div class="cmp-header">⚔️ Hasil Perbandingan</div>
+
+      <!-- Player cards -->
+      <div class="cmp-players" id="cmp-players-row"></div>
+
+      <!-- Pie Donut Charts Row -->
+      <div class="cmp-pie-row" id="cmp-pie-row"></div>
+
+      <!-- Score rows -->
+      <div class="cmp-rows" id="cmp-rows"></div>
+
+      <!-- Percentile bar -->
+      <div class="cmp-percentile-wrap">
+        <div class="cmp-percentile-title">Posisi Persentil (berdasarkan jumlah nilai TKA)</div>
+        <div class="pct-bar-container">
+          <div class="pct-bar-bg"></div>
+          <div id="pct-markers-row"></div>
+        </div>
+        <div class="pct-labels"><span>Terendah</span><span>Median</span><span>Tertinggi</span></div>
+        <div class="cmp-legend" id="pct-legend-row"></div>
+      </div>
+
+      <!-- Insight Summary Box -->
+      <div id="cmp-summary"></div>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+</div><!-- /main-content -->
+
+<script>
+const RAW = [
+  [1,"3100445129","Ariska Febriyanti","Batam, 11 Februari 2010",33.33,"Memadai",73.33,"Memadai"],
+  [2,"0117637776","Nolia Anggraini Putri","KABUPATEN KARIMUN, 17 Juni 2011",23.33,"Kurang",43.33,"Kurang"],
+  [3,"0105105560","SOPHIE APRILLIA NASUTION","BATAM, 30 April 2010",30.00,"Kurang",60.00,"Memadai"],
+  [4,"0103984419","MUHAMMAD FHADIL AL RAAFI","BATAM, 16 Juni 2010",46.67,"Memadai",86.67,"Baik"],
+  [5,"0118522928","Ghina Latifah Azzahra","Batam, 16 Januari 2011",36.67,"Memadai",76.67,"Baik"],
+  [6,"0104130008","GRACIA LAURA ARDIAN","BATAM, 24 Oktober 2010",50.00,"Memadai",50.00,"Memadai"],
+  [7,"3108897744","SUCI ADELIA RAMADHANI","BATAM, 31 Agustus 2010",43.33,"Memadai",70.00,"Memadai"],
+  [8,"3109280409","NUR AISYAH ARNAR","BATAM, 10 Oktober 2010",43.33,"Memadai",80.00,"Baik"],
+  [9,"0104975839","NAZIRA FAIZAH PUTRI","Batam, 17 Juli 2010",30.00,"Kurang",66.67,"Memadai"],
+  [10,"0109650158","Daniel George Sutrisno Siboro","Batam, 4 Januari 2010",33.33,"Memadai",46.67,"Kurang"],
+  [11,"0102101225","YULAN RENATA PELITA NADAPDAP","BATAM, 16 November 2010",33.33,"Memadai",66.67,"Memadai"],
+  [12,"0118636088","KHOLIQ SAPUTRA OI","Batam, 6 Januari 2011",40.00,"Memadai",36.67,"Kurang"],
+  [13,"0102278400","ZASKIYAH PUTRI NASUTION","BATAM, 28 April 2010",23.33,"Kurang",66.67,"Memadai"],
+  [14,"0115116224","GHUMAISYA TSADZA","BATAM, 19 Mei 2011",56.67,"Baik",73.33,"Memadai"],
+  [15,"0114417734","LABIBAH FARANNISA","BATAM, 26 Januari 2011",30.00,"Kurang",83.33,"Baik"],
+  [16,"0119939704","Elizabeth Naulina Simanjuntak","Batam, 17 Januari 2011",46.67,"Memadai",83.33,"Baik"],
+  [17,"0103346060","JIHAN RAMADHANI","BATUSANGKAR, 25 Agustus 2010",43.33,"Memadai",73.33,"Memadai"],
+  [18,"0108593157","Aori Eka Putra","Batam, 24 Juli 2010",36.67,"Memadai",63.33,"Memadai"],
+  [19,"0105715720","MEILIA KEISYA ANGGRAINI","BATAM, 7 Mei 2010",50.00,"Memadai",66.67,"Memadai"],
+  [20,"0108233049","Najwa Seizha","Tanjung Balai Karimun, 25 Desember 2010",50.00,"Memadai",76.67,"Baik"],
+  [21,"0118779140","Muhammad Fitra Alamsyah","Batam, 1 September 2011",60.00,"Baik",70.00,"Memadai"],
+  [22,"0116483228","Claudia Derbiana","Batam, 1 Januari 2011",46.67,"Memadai",76.67,"Baik"],
+  [23,"0097508404","FEBRIANSYAH MUHAMMAD RISKI","Batam, 22 Februari 2009",43.33,"Memadai",70.00,"Memadai"],
+  [24,"0105908057","NOEL YOEL AYAL","BATAM, 29 November 2010",50.00,"Memadai",73.33,"Memadai"],
+  [25,"0104208452","Siti Aisyah Anantri","Batam, 26 Januari 2010",60.00,"Baik",76.67,"Baik"],
+  [26,"0104694061","WITA SARI MAGDALENA","BATAM, 2 Juni 2010",46.67,"Memadai",70.00,"Memadai"],
+  [27,"0108869881","Arman Muhammad","Batam, 20 November 2010",23.33,"Kurang",60.00,"Memadai"],
+  [28,"0108485374","MUHAMMAD FARHAD","SURABAYA, 1 Mei 2010",53.33,"Memadai",40.00,"Kurang"],
+  [29,"3143090718","PUTRI NAOMI","Kota Medan, 23 Juli 2010",43.33,"Memadai",70.00,"Memadai"],
+  [30,"0115160363","RIZKY ADITIA PRATAMA","BATAM, 7 Maret 2011",43.33,"Memadai",66.67,"Memadai"],
+  [31,"0104207101","Destryna Verawati Simanjuntak","Batam, 18 Desember 2010",46.67,"Memadai",50.00,"Memadai"],
+  [32,"0119583556","Elisabeth Putri Sonya Hutabarat","Batam, 24 Agustus 2011",53.33,"Memadai",70.00,"Memadai"],
+  [33,"0106409729","Dhea Desvita","Batam, 23 Desember 2010",36.67,"Memadai",60.00,"Memadai"],
+  [34,"0096348717","REIY VHAL JOLIANO","BATAM, 6 Juli 2009",33.33,"Memadai",53.33,"Memadai"],
+  [35,"0112303694","MUHAMMAD SYAWAL ARRAFFI","BATAM, 4 September 2011",33.33,"Memadai",73.33,"Memadai"],
+  [36,"0114985755","Askhiya Adila Syarof","Batam, 11 Mei 2011",43.33,"Memadai",60.00,"Memadai"],
+  [37,"0098411385","Dendi Salim","Batam, 19 September 2009",40.00,"Memadai",76.67,"Baik"],
+  [38,"0106013102","WILDAN TSAUKANI","BATAM, 19 September 2010",56.67,"Baik",53.33,"Memadai"],
+  [39,"0109905824","SITI NASYWA KANAYA","BATAM, 21 Agustus 2010",30.00,"Kurang",66.67,"Memadai"],
+  [40,"0103957127","PREZY OKTIANTARA","Batam, 30 Oktober 2010",46.67,"Memadai",60.00,"Memadai"],
+  [41,"0109474702","Arvin Maulana Iqbal","Batam, 25 Desember 2010",46.67,"Memadai",90.00,"Baik"],
+  [42,"0106990106","Zahri Fedriko","Sungai Guntung, 19 Desember 2010",46.67,"Memadai",73.33,"Memadai"],
+  [43,"0116546983","Tanzila Anindya Putri","Batam, 25 Januari 2011",30.00,"Kurang",63.33,"Memadai"],
+  [44,"0106499564","Esther Anastasya Sidabutar","Cimahi, 9 Agustus 2010",50.00,"Memadai",83.33,"Baik"],
+  [45,"0102672692","Radhitya Javas Nararya","Boyolali, 3 Februari 2010",33.33,"Memadai",53.33,"Memadai"],
+  [46,"0101143423","Igo Saputra","Batam, 10 Oktober 2010",36.67,"Memadai",83.33,"Baik"],
+  [47,"0118302286","Diego Adrian Jeremi Sembiring","Batam, 25 April 2011",53.33,"Memadai",66.67,"Memadai"],
+  [48,"0101049444","Muhammad Naufal Al Adrian","Batam, 11 Juni 2010",26.67,"Kurang",43.33,"Kurang"],
+  [49,"0093173876","Syerin Stivanesia","Tasik Juang, 22 Oktober 2009",40.00,"Memadai",70.00,"Memadai"],
+  [50,"0107495083","Nanda Rezali Septiadi Putra","Batam, 28 September 2010",33.33,"Memadai",63.33,"Memadai"],
+  [51,"0102842794","Siva Agustina Melchan","Batam, 7 Agustus 2010",56.67,"Baik",70.00,"Memadai"],
+  [52,"0116694186","Riamika Erfani Hutabarat","Kota Batam, 8 Mei 2011",26.67,"Kurang",83.33,"Baik"],
+  [53,"0108126723","Clarisa Regina Putri","Padang, 13 Juni 2010",43.33,"Memadai",66.67,"Memadai"],
+  [54,"0102902649","Juliani Triwulandari","Tanjung Uban, 27 Juli 2010",40.00,"Memadai",83.33,"Baik"],
+  [55,"0109643964","Devi Herlina Sari","Batam, 7 Desember 2010",36.67,"Memadai",63.33,"Memadai"],
+  [56,"0108628516","Zikri Kholby Harahap","Binjai, 15 Desember 2010",36.67,"Memadai",50.00,"Memadai"],
+  [57,"0147953563","MUHAMMAD FADIL","KOTA BATAM, 22 Agustus 2010",46.67,"Memadai",66.67,"Memadai"],
+  [58,"0116628832","Fahan Anugrah Marvel","Solok, 7 Maret 2011",26.67,"Kurang",63.33,"Memadai"],
+  [59,"0073509854","Reza Ardiansyah","Kota Batam, 28 Oktober 2007",43.33,"Memadai",80.00,"Baik"],
+  [60,"0104009200","Deny Riski","Kota Batam, 29 Mei 2010",43.33,"Memadai",60.00,"Memadai"],
+  [61,"0113605991","Syairah Febriani","KAYUAGUNG, 28 Februari 2011",40.00,"Memadai",43.33,"Kurang"],
+  [62,"0109034019","AL RIDO","BATAM, 29 September 2010",43.33,"Memadai",43.33,"Kurang"],
+  [63,"0102713091","Neyna Nurhaliza Hanny","Batam, 9 November 2010",26.67,"Kurang",50.00,"Memadai"],
+  [64,"0101044426","HAMORA SANDOVA NASUTION","Sabang, 2 Oktober 2010",40.00,"Memadai",56.67,"Memadai"],
+  [65,"0112160394","Nasdha Rahel Bagariang","Batam, 11 April 2011",36.67,"Memadai",50.00,"Memadai"],
+  [66,"0107995708","MUHAMMAD ARMAN","BATAM, 6 November 2010",40.00,"Memadai",36.67,"Kurang"],
+  [67,"0104765228","Nazwa Hafiza Yanis","Gedung Wani, 11 November 2010",40.00,"Memadai",73.33,"Memadai"],
+  [68,"0101198423","Nisa Yuniasari","Batam, 24 Juni 2010",30.00,"Kurang",73.33,"Memadai"],
+  [69,"0117276138","Nesya Queen","Tanjung Pinang, 5 Desember 2010",40.00,"Memadai",50.00,"Memadai"],
+  [70,"0107508821","Arya Adi Mukti","Batam, 6 April 2010",30.00,"Kurang",66.67,"Memadai"],
+  [71,"0108575750","CINBY ANROBEL PARULIAN CETANG","BATAM, 30 Oktober 2010",20.00,"Kurang",46.67,"Kurang"],
+  [72,"0118181458","Habibah Wafiah","Batam, 28 Maret 2011",43.33,"Memadai",60.00,"Memadai"],
+  [73,"0114199076","Zihan Kazara","Batam, 19 Januari 2011",40.00,"Memadai",56.67,"Memadai"],
+  [74,"0101430646","Axcello Valerio Wiguna","Batam, 6 Januari 2010",36.67,"Memadai",70.00,"Memadai"],
+  [75,"0101990582","INTANSUWI MANALU","Sisoding, 16 November 2010",33.33,"Memadai",70.00,"Memadai"],
+  [76,"0101339156","Kenzie Khaizan Al Qaasimy","Pasar Surulangun, 26 Juli 2010",60.00,"Baik",80.00,"Baik"],
+  [77,"0103923719","Ayuni Zawani","Batam, 3 Juni 2010",43.33,"Memadai",70.00,"Memadai"],
+  [78,"0114036373","Aulia Nanda Azzahra","Batam, 12 April 2011",43.33,"Memadai",50.00,"Memadai"],
+  [79,"0105218645","Syifa Apriliani","Batam, 6 April 2010",53.33,"Memadai",70.00,"Memadai"],
+  [80,"0101539078","Rizki Eka Saputra","Batam, 19 Mei 2010",56.67,"Baik",70.00,"Memadai"],
+  [81,"0107052508","Rena Wijayanti","Batam, 20 September 2010",30.00,"Kurang",73.33,"Memadai"],
+  [82,"0115654423","Yola Aprilia","Teluk Pandak, 15 April 2011",30.00,"Kurang",56.67,"Memadai"],
+  [83,"0107883089","AIDIL FIKRI","BATAM, 10 September 2010",46.67,"Memadai",53.33,"Memadai"],
+  [84,"0107935717","Razita Ramadhani Jigesa Albi","Batam, 12 Agustus 2010",50.00,"Memadai",73.33,"Memadai"],
+  [85,"0111069864","MUHAMMAD FAISAL","MERANTI, 2 Februari 2011",36.67,"Memadai",63.33,"Memadai"],
+  [86,"0106097936","AISYATUL RAMADANIAH SAMSIR","BATAM, 7 September 2010",50.00,"Memadai",53.33,"Memadai"],
+  [87,"0099492318","MUHAMMAD FAHRI RAMADHAN","KOTA BATAM, 30 Agustus 2007",30.00,"Kurang",66.67,"Memadai"],
+  [88,"0109345373","Muhammad Derby Ramadhan","Batam, 15 Agustus 2010",53.33,"Memadai",83.33,"Baik"],
+  [89,"0106738061","Aisha Afifa","Tembilahan, 6 Desember 2010",53.33,"Memadai",60.00,"Memadai"],
+  [90,"0104639939","MARVEL GIRAN KURNIAWAN","PIASA ULU, 21 November 2010",40.00,"Memadai",43.33,"Kurang"],
+  [91,"0108174748","NAJWA ASYILAH PUTRI","BATAM, 11 Juni 2010",36.67,"Memadai",60.00,"Memadai"],
+  [92,"0107231276","Windy Octavia","Batam, 13 Oktober 2010",30.00,"Kurang",70.00,"Memadai"],
+  [93,"0101344772","MONIKA LAMORE SITOHANG","BATAM, 13 Juni 2010",50.00,"Memadai",76.67,"Baik"],
+  [94,"0105556206","AIDIL SAPUTRA","BATAM, 17 November 2010",33.33,"Memadai",60.00,"Memadai"],
+  [95,"0107858786","CLARISA MARGARETHA SINULINGGA","BATAM, 18 Oktober 2010",63.33,"Baik",80.00,"Baik"],
+  [96,"0101599502","QUN FITRAH RAMADHAN","BATAM, 8 September 2010",43.33,"Memadai",73.33,"Memadai"],
+  [97,"0093647216","ANDHIKA ADITYA PRATAMA","BATAM, 12 Oktober 2009",43.33,"Memadai",83.33,"Baik"],
+  [98,"0096736087","Rangga Kurnia Pratama","Batam, 13 Oktober 2009",50.00,"Memadai",53.33,"Memadai"],
+  [99,"0107470936","SALZY YUSUF KANERA","BATAM, 23 Februari 2010",40.00,"Memadai",76.67,"Baik"],
+  [100,"0109503452","GABRIEL LIUS DOLI","BATAM, 5 September 2010",40.00,"Memadai",73.33,"Memadai"],
+  [101,"0106565225","SITI SUKMAWATI","KEBUN NYIUR, 30 Juni 2010",46.67,"Memadai",66.67,"Memadai"],
+  [102,"0118477722","PRAMDI RAGA DIRGANTARA","BATAM, 3 Mei 2011",40.00,"Memadai",70.00,"Memadai"],
+  [103,"0102996561","Irfansyafsah Anugerah","BATAM, 30 Desember 2010",40.00,"Memadai",46.67,"Kurang"],
+  [104,"0105609819","FRISCA SOFIANA SARI","BATAM, 20 September 2010",46.67,"Memadai",76.67,"Baik"],
+  [105,"0105773513","LIVIA KALISA PUTRI","BATAM, 8 Juli 2010",33.33,"Memadai",83.33,"Baik"],
+  [106,"0112126325","Hadira Ayyatul Husna","Batam, 12 Agustus 2011",26.67,"Kurang",53.33,"Memadai"],
+  [107,"0111147463","ZALFA RINJANI SOLEHAH","BATAM, 16 Juni 2011",60.00,"Baik",66.67,"Memadai"],
+  [108,"0103547865","Muhammad Rafa Nurhadi","Jakarta, 17 April 2010",43.33,"Memadai",73.33,"Memadai"],
+  [109,"0102286847","GYANDRA MARVELINO TOHIR","BATAM, 7 Maret 2010",46.67,"Memadai",50.00,"Memadai"],
+  [110,"0113194666","SISKA NURFADILAH","SUBANG, 3 Juli 2011",46.67,"Memadai",63.33,"Memadai"],
+  [111,"0119498954","KHAIRUNNISA ASFIRAH","SUNGAI LASI, 17 Maret 2011",33.33,"Memadai",80.00,"Baik"],
+  [112,"0102716103","CINTYA WAHYU RAHMADHANI PUTRI","BATAM, 19 September 2010",46.67,"Memadai",66.67,"Memadai"],
+  [113,"0109396944","Nur Azizah Btr","Siabu, 17 November 2010",23.33,"Kurang",66.67,"Memadai"],
+  [114,"0113996426","BRAYEN ANDIKA SAPUTRA","BATAM, 13 Maret 2011",43.33,"Memadai",70.00,"Memadai"],
+  [115,"0101231008","FADHIL ABDUL HAQ","BATAM, 2 Juli 2010",53.33,"Memadai",83.33,"Baik"],
+  [116,"0118499907","WILDAN ABDUL HAKIM","BATAM, 27 Februari 2011",40.00,"Memadai",60.00,"Memadai"],
+  [117,"0103096923","Livy Julyanti Saragih","Sibarou, 24 Juli 2010",36.67,"Memadai",73.33,"Memadai"],
+  [118,"0105576796","LINTANG ARIRI","BATAM, 30 Desember 2010",43.33,"Memadai",76.67,"Baik"],
+  [119,"0102970257","JESICA PUTRI IRWANSYAH","Subang, 30 Juni 2010",40.00,"Memadai",46.67,"Kurang"],
+  [120,"0107490619","M. KHOIRUL SALEH","BATAM, 12 Juni 2010",53.33,"Memadai",86.67,"Baik"],
+  [121,"0119834481","Nikita Claudya Mukuan","Palu, 27 Juli 2011",26.67,"Kurang",30.00,"Kurang"],
+  [122,"0114920921","PUTRI DEBIRIA SIDABUTAR","Batam, 22 Juni 2011",60.00,"Baik",66.67,"Memadai"],
+  [123,"0103588042","MUHAMMAD SAYYIDINA SHALEH","JAMBU, 27 Juni 2010",46.67,"Memadai",60.00,"Memadai"],
+  [124,"0112795444","YOSHELIN OVELIA","Batam, 30 Juli 2011",53.33,"Memadai",56.67,"Memadai"],
+  [125,"0102942028","Nadya Amanda Putri","Batam, 2 November 2010",46.67,"Memadai",73.33,"Memadai"],
+  [126,"0114688042","RAFFA ADITYA PRATAMA","BATAM, 30 Maret 2011",30.00,"Kurang",63.33,"Memadai"],
+  [127,"0106614362","BAGOES HIDAYANTO","BATAM, 13 Mei 2010",33.33,"Memadai",63.33,"Memadai"],
+  [128,"3119374298","DAVINA FERDIAN MAJESTY","BANDAR LAMPUNG, 2 Januari 2011",50.00,"Memadai",73.33,"Memadai"],
+  [129,"0103971129","Philips Dearson Damanik","Sei Banban, 8 Oktober 2010",43.33,"Memadai",83.33,"Baik"],
+  [130,"3108540974","SYAHMAN ASAQRI LILIWERI","LEMBATA, 25 September 2010",23.33,"Kurang",30.00,"Kurang"],
+  [131,"0101356094","AMELIA DWI CANTIKA NABABAN","Batam, 17 September 2010",33.33,"Memadai",70.00,"Memadai"],
+  [132,"0106805966","MIKHAEL FEBRIAZ ARYATMAJA","JOMBANG, 1 Februari 2010",60.00,"Baik",90.00,"Baik"],
+  [133,"0101243820","DEDE ANDRI CAHYA PUTRA","Batam, 11 Juli 2010",46.67,"Memadai",76.67,"Baik"],
+  [134,"0103776484","RISKY FADILAH RAMADHANI","BATAM, 2 September 2010",36.67,"Memadai",80.00,"Baik"],
+  [135,"0109960960","IRSYAD RADEN MAHFUZDHO","BATAM, 9 Juni 2010",33.33,"Memadai",86.67,"Baik"],
+  [136,"0105708582","Gading Galih Gumilang M","Gunung Madu, 6 Februari 2010",43.33,"Memadai",73.33,"Memadai"],
+  [137,"0116735330","SABRINA ANDRIANI","BATAM, 29 Juni 2011",36.67,"Memadai",56.67,"Memadai"],
+  [138,"0102196024","ADARA JANEETA","JAKARTA, 11 April 2010",53.33,"Memadai",76.67,"Baik"],
+  [139,"0117244415","Nadine Jeshika Waruwu","Batam, 25 Juli 2011",53.33,"Memadai",73.33,"Memadai"],
+  [140,"0112115319","AMELIA PRAMESTI","BATAM, 28 Mei 2011",46.67,"Memadai",46.67,"Kurang"],
+  [141,"3119160946","CAYLA MAHARANI PUTRI","BENGKULU, 22 Januari 2011",60.00,"Baik",70.00,"Memadai"],
+  [142,"0115070354","Enzelyn","Batam, 16 Juli 2011",40.00,"Memadai",56.67,"Memadai"],
+  [143,"0108118170","M.ZAHRIL DARMA SYAHPUTRA","Batam, 3 Juni 2010",33.33,"Memadai",43.33,"Kurang"],
+  [144,"0107685639","ALVINO PRATAMA","PEMATANG PANJANG, 20 Desember 2010",43.33,"Memadai",70.00,"Memadai"],
+  [145,"0108968825","AZILIA KEISYHA RAMADANI","Batam, 10 Agustus 2010",43.33,"Memadai",70.00,"Memadai"],
+  [146,"3117888372","ABYAZ ARSHAVIN PUTRA HERDIYANTO","BATAM, 18 April 2011",36.67,"Memadai",86.67,"Baik"],
+  [147,"0098637497","ADITIYA IBRAHIM","TANGERANG, 27 Oktober 2009",43.33,"Memadai",60.00,"Memadai"],
+  [148,"0119943691","VIRZY REVANDOW","Sialogo, 15 Oktober 2011",50.00,"Memadai",63.33,"Memadai"],
+  [149,"0089927171","Muhammad Luthfan Sholeh","Batam, 24 Desember 2008",20.00,"Kurang",60.00,"Memadai"],
+  [150,"0102912046","SULTAN YUWANDA","Pidie Jaya, 17 Oktober 2010",33.33,"Memadai",73.33,"Memadai"],
+  [151,"0109891119","PUTRI VANESHA L TOBING","BATAM, 23 Juni 2010",33.33,"Memadai",73.33,"Memadai"],
+  [152,"3102261137","Adriano Christian Saragih","Medan, 8 September 2010",53.33,"Memadai",80.00,"Baik"],
+  [153,"0106878384","NAUFAL ALFARIZY","BATAM, 29 Oktober 2010",43.33,"Memadai",53.33,"Memadai"],
+  [154,"0108276056","USWATUL HASANAH","KOTA BATAM, 28 Desember 2010",43.33,"Memadai",50.00,"Memadai"],
+  [155,"0108251498","ELMIKA MAHARANI PUTRI","PALEMBANG, 17 Juni 2010",46.67,"Memadai",70.00,"Memadai"],
+  [156,"0101293175","YUNISTIRA OKTIANI SYAHPUTRI","Dabo Singkep, 15 Oktober 2011",46.67,"Memadai",73.33,"Memadai"],
+  [157,"0106467766","ABDUL MUIS AZIZ","BATAM, 19 Januari 2010",43.33,"Memadai",56.67,"Memadai"],
+  [158,"0111034222","MUHAMMAD RAFFAEL ZHAFRAN","BATAM, 8 Maret 2011",50.00,"Memadai",63.33,"Memadai"],
+  [159,"0103531128","SAFA ASHILLA PUTRI","BATAM, 15 Juni 2010",40.00,"Memadai",76.67,"Baik"],
+  [160,"0101997198","SYAFA RAISYA WAHYU PUTRI","BOJONEGORO, 8 Juli 2010",53.33,"Memadai",93.33,"Baik"],
+  [161,"0116208336","KASIH NURUL SAHARA","BELAKANG PADANG, 24 Juni 2011",43.33,"Memadai",56.67,"Memadai"],
+  [162,"0102621240","ISRA MAULANI","BATAM, 10 Juli 2010",36.67,"Memadai",63.33,"Memadai"],
+  [163,"0103922094","NADIRA AWALYA MEKHA","Batam, 20 Juli 2010",40.00,"Memadai",86.67,"Baik"],
+  [164,"0106659016","Dhirvy Alqiarah Insyirah Rahmadani","Batam, 18 Agustus 2010",36.67,"Memadai",76.67,"Baik"],
+  [165,"0115888980","INTAN ASYFA","LANGKAT, 31 Januari 2012",36.67,"Memadai",70.00,"Memadai"],
+  [166,"0109270674","Daffa Khairullah","Medan, 30 Agustus 2010",43.33,"Memadai",63.33,"Memadai"],
+  [167,"0101235901","TESA AMELIA","LUBUK KEMANG, 20 Agustus 2010",43.33,"Memadai",56.67,"Memadai"],
+  [168,"0117289161","ALLYA DIANI PUTRI","BATAM, 13 April 2011",30.00,"Kurang",46.67,"Kurang"],
+  [169,"0103854976","AKBAR SYAHRIZKI","BATAM, 23 Desember 2010",43.33,"Memadai",73.33,"Memadai"],
+  [170,"0106618319","YIZREEL SATRIO AGUNG","BATAM, 10 Oktober 2010",43.33,"Memadai",56.67,"Memadai"],
+  [171,"0104977795","LAILA CAHAYA RAMADHANI","BATAM, 5 September 2010",23.33,"Kurang",86.67,"Baik"],
+  [172,"0104494827","Damara Febry Nugraheni","BATAM, 11 Februari 2010",50.00,"Memadai",56.67,"Memadai"],
+  [173,"0109775841","GITA NUR QONI'AH","BATAM, 20 Desember 2010",36.67,"Memadai",66.67,"Memadai"],
+  [174,"0108934231","Alif Dwi Pramudita","Batam, 26 Oktober 2010",33.33,"Memadai",40.00,"Kurang"],
+  [175,"0112628302","MUHAMMAD ZIKRA ALVINO","TEBING KARIMUN, 15 April 2011",53.33,"Memadai",73.33,"Memadai"],
+  [176,"0107532802","YAZMIN PUTRI AULIA","BATAM, 29 Desember 2010",46.67,"Memadai",70.00,"Memadai"],
+  [177,"0105585691","DANI RIZKIAN","BATAM, 27 September 2010",46.67,"Memadai",76.67,"Baik"],
+  [178,"0103612509","SYAHARA NOVIA MELINDA","TAMBELAN, 25 November 2010",46.67,"Memadai",66.67,"Memadai"],
+  [179,"0108569056","IKHRAM MUTTAQIEN","BATAM, 4 November 2010",40.00,"Memadai",66.67,"Memadai"],
+  [180,"3104642126","RISKA ARSITA","BATAM, 22 Desember 2010",30.00,"Kurang",73.33,"Memadai"],
+  [181,"0105393466","AKBAR RAHMATSYAH","BATAM, 2 Agustus 2010",46.67,"Memadai",66.67,"Memadai"],
+  [182,"0097908322","OKTARIVA CHANTIKA","PALEMBANG, 10 Oktober 2009",36.67,"Memadai",90.00,"Baik"],
+  [183,"0109227233","NYAYU CHARIS NIEZHA","BATAM, 29 Juni 2010",56.67,"Baik",66.67,"Memadai"],
+  [184,"0113259153","Yusuf Rizky Sulaiman Putra","Batam, 18 Januari 2011",50.00,"Memadai",83.33,"Baik"],
+  [185,"0103966101","PUTRI MELI BENIH BR PAKPAHAN","BATAM, 6 September 2010",53.33,"Memadai",66.67,"Memadai"],
+  [186,"0113155679","KRIS TOBEL SIMAREMARE","Batam, 25 April 2011",43.33,"Memadai",33.33,"Kurang"],
+  [187,"0119481018","SYAHRINI","PULAU SANGKAR, 5 Januari 2011",26.67,"Kurang",70.00,"Memadai"],
+  [188,"0113155917","KHANA SABIL SAHNAZ","BAKARAN BATU, 5 Januari 2011",30.00,"Kurang",86.67,"Baik"],
+  [189,"0098028189","MUHAMMAD IQBAL","SUMBAWA, 25 Oktober 2009",26.67,"Kurang",63.33,"Memadai"],
+  [190,"0115408379","NAURAH DWI AATHIRAH","BATAM, 29 Juli 2011",56.67,"Baik",63.33,"Memadai"],
+  [191,"0118463562","MELATI FLORIDA SITUMORANG","Indrapura, 14 Januari 2011",20.00,"Kurang",56.67,"Memadai"],
+  [192,"0111345594","Maria Meyriska Punga","Batam, 14 Mei 2011",26.67,"Kurang",66.67,"Memadai"],
+  [193,"0106006932","ANINDYA NIBRAS RAMADHANI","KOTA BATAM, 13 Agustus 2010",46.67,"Memadai",70.00,"Memadai"],
+  [194,"0108256551","ARIESTA LIANY","BATAM, 29 Mei 2010",40.00,"Memadai",63.33,"Memadai"],
+  [195,"3117476493","Josua Moses N. Harek","Kota Batam, 4 Juli 2011",43.33,"Memadai",83.33,"Baik"],
+  [196,"0103605761","FAIRUZ","BATAM, 3 Juli 2010",50.00,"Memadai",86.67,"Baik"],
+  [197,"0116095896","ZENITA FRANSISKA PURBA","BATAM, 9 Maret 2011",36.67,"Memadai",53.33,"Memadai"],
+  [198,"0107334872","OKTAFIA PUTRI PERDANI","BATAM, 3 Oktober 2010",56.67,"Baik",56.67,"Memadai"],
+  [199,"0109910917","DYAH AYU PITALOKA","BATAM, 16 Juli 2010",43.33,"Memadai",73.33,"Memadai"],
+  [200,"0102286857","REKA FEBRIANA","Karimun, 20 Februari 2010",36.67,"Memadai",50.00,"Memadai"],
+  [201,"0095314088","WELTIUS SIANTURI","Jakarta, 18 November 2009",46.67,"Memadai",76.67,"Baik"],
+  [202,"0106501021","Muhammad Galih Dini Prasetyo","Batam, 31 Juli 2010",43.33,"Memadai",73.33,"Memadai"],
+  [203,"0097480018","AKBAR SYAFI'I RAHMANSYAH","BATAM, 12 Desember 2009",36.67,"Memadai",56.67,"Memadai"],
+  [204,"0106542495","MUHAMMAD IQBAL GALANG PRATAMA","BATAM, 27 Mei 2010",36.67,"Memadai",63.33,"Memadai"],
+  [205,"0107913859","NAWAL IZUDIN","BATAM, 27 Desember 2010",40.00,"Memadai",50.00,"Memadai"],
+  [206,"0103539548","Nahum Pahalatua Silalahi","BAWANG, 28 Desember 2010",53.33,"Memadai",70.00,"Memadai"],
+  [207,"0111192679","NURAVIPIH","BATAM, 23 April 2011",46.67,"Memadai",66.67,"Memadai"],
+  [208,"0106039047","RAIHAN ANDARU FIRDAUS","BATAM, 9 Maret 2010",33.33,"Memadai",73.33,"Memadai"],
+  [209,"0118436874","PUTRI AASHIRA","BATAM, 9 April 2011",43.33,"Memadai",56.67,"Memadai"],
+  [210,"0107301107","MUHAMMAD AKBAR FAHCRIZI","INDERAPURA, 30 Oktober 2010",40.00,"Memadai",50.00,"Memadai"],
+  [211,"0107855934","KANZA HAFANA SIVA","BATAM, 26 November 2010",60.00,"Baik",83.33,"Baik"],
+  [212,"0114560566","Satria Cahya Adhil Wicaksono","Batam, 24 Februari 2011",43.33,"Memadai",60.00,"Memadai"],
+  [213,"0113529145","JENIFA DELFIANA","Batam, 9 Juni 2011",56.67,"Baik",66.67,"Memadai"],
+  [214,"0104519093","Bagus Ramadan","Kota Batam, 20 Agustus 2010",46.67,"Memadai",80.00,"Baik"],
+  [215,"0101931839","IKHSAN KAMIL","Indragiri Hilir, 25 Mei 2010",26.67,"Kurang",66.67,"Memadai"],
+  [216,"0118519543","ADITYA HANAFI","BATAM, 19 Mei 2011",46.67,"Memadai",70.00,"Memadai"],
+  [217,"0107790627","APRILIA SARI","BATAM, 24 April 2010",50.00,"Memadai",40.00,"Kurang"],
+  [218,"0089662378","MUHAMMAD AHIR","Palembang, 8 Desember 2008",33.33,"Memadai",30.00,"Kurang"],
+  [219,"0105251808","ADINDA NABILA","BATAM, 1 Agustus 2010",50.00,"Memadai",60.00,"Memadai"],
+  [220,"0101468313","FAHMIATUN","RAJA, 8 November 2010",40.00,"Memadai",36.67,"Kurang"],
+  [221,"0107892189","RAHMADANI SARAH SYAH VITRI","BATAM, 9 September 2010",43.33,"Memadai",60.00,"Memadai"],
+  [222,"0107170163","SASHMELL AULIA LOVINA","BATAM, 19 Desember 2010",50.00,"Memadai",66.67,"Memadai"],
+  [223,"0101327727","FIQQI PRATAMA","BATAM, 15 Juli 2010",36.67,"Memadai",53.33,"Memadai"],
+  [224,"0102283296","Bunga Aprillia Bustami","Batam, 15 April 2010",40.00,"Memadai",80.00,"Baik"],
+  [225,"0107118136","ADLY MUZAKI","BATAM, 26 Januari 2010",63.33,"Baik",73.33,"Memadai"],
+  [226,"0108199498","MUHAMAD RAMAH DANI","Batam, 12 Agustus 2010",40.00,"Memadai",53.33,"Memadai"],
+  [227,"0109191175","RADITYA PRIBADI","SUBANG, 2 Juli 2010",46.67,"Memadai",60.00,"Memadai"],
+  [228,"0103822277","INDAH NURAFIFAH ISMANDA","BATAM, 29 Juli 2010",30.00,"Kurang",66.67,"Memadai"],
+  [229,"0107908791","KEISHA PUTRI ABRINA","PALEMBANG, 13 Maret 2010",56.67,"Baik",80.00,"Baik"],
+  [230,"0114391388","MUHAMAD ERZA KARWANTA PERDANA","KUNDUR KARIMUN, 15 Februari 2011",36.67,"Memadai",83.33,"Baik"],
+  [231,"0108446646","Glen Fajar Situmorang","Batam, 15 November 2010",43.33,"Memadai",56.67,"Memadai"],
+  [232,"0115849868","Putri Marisa Simanjuntak","Batam, 25 Maret 2011",56.67,"Baik",66.67,"Memadai"],
+  [233,"0103801382","DHIZEL PRADITYA PUTRA","BATAM, 14 Februari 2010",46.67,"Memadai",53.33,"Memadai"],
+  [234,"0104788303","Vivi Rahma Yanti","Batam, 22 September 2010",60.00,"Baik",53.33,"Memadai"],
+  [235,"0104824269","TITANIA KHOIRUNISA","BATAM, 20 Juli 2010",66.67,"Baik",73.33,"Memadai"],
+  [236,"0098037660","CHIKA ELMIA RAYA","BATAM, 25 September 2009",43.33,"Memadai",90.00,"Baik"],
+  [237,"0108593930","MUHAMMAD AIDHIL AKBAR","BATAM, 22 September 2010",30.00,"Kurang",76.67,"Baik"],
+  [238,"0102826468","ANGGI AYUDIANINGRUM","BATAM, 22 Oktober 2010",36.67,"Memadai",80.00,"Baik"],
+  [239,"0114890955","Nailil Amani Sayuti","Batam, 30 April 2011",40.00,"Memadai",83.33,"Baik"],
+  [240,"0111366952","WAHYU BABERLY PAKPAHAN","Batam, 30 Juli 2011",40.00,"Memadai",73.33,"Memadai"],
+  [241,"0104390178","AFIFAH VINA MAWADAH","BATAM, 13 November 2010",26.67,"Kurang",53.33,"Memadai"],
+  [242,"0106818948","NAILA WARDA LAHFAH","WONOGIRI, 23 Juli 2010",43.33,"Memadai",56.67,"Memadai"],
+  [243,"0109069779","Maria Putri Natalia","Batam, 21 Desember 2010",50.00,"Memadai",86.67,"Baik"],
+  [244,"0102166013","MUHAMMAD SYARIF HIDAYATULLAH","BATAM, 12 Juni 2010",43.33,"Memadai",53.33,"Memadai"],
+  [245,"0108048215","Ariny Zahra","Batam, 15 September 2010",40.00,"Memadai",80.00,"Baik"],
+  [246,"0108188022","MUHAMMAD RISQI","BATAM, 18 Desember 2010",36.67,"Memadai",70.00,"Memadai"],
+  [247,"0108545730","M. Alif Alfadhilla","Batam, 24 November 2010",40.00,"Memadai",63.33,"Memadai"],
+  [248,"0109654931","Muhammad Messi Mutriana","Solok Selatan, 20 September 2010",56.67,"Baik",50.00,"Memadai"],
+  [249,"0093811692","Maulana Rahun Sadikin HSB","Batam, 16 Desember 2009",23.33,"Kurang",66.67,"Memadai"],
+  [250,"0111560611","NADIA SYAHPUTRI NASUTION","BATAM, 12 Maret 2011",43.33,"Memadai",60.00,"Memadai"],
+  [251,"0111977966","Sarina Nurjannah","Batam, 6 Juni 2011",33.33,"Memadai",63.33,"Memadai"],
+  [252,"0101618107","Permata Dwi Kayla Solisa","Batam, 17 September 2010",43.33,"Memadai",83.33,"Baik"],
+  [253,"0101598987","Sidqi Nur Akmal Romadhoni","Batam, 24 Agustus 2010",36.67,"Memadai",60.00,"Memadai"],
+  [254,"0103360119","Altaf Ranggi Prakoso","Batam, 5 Agustus 2010",53.33,"Memadai",90.00,"Baik"],
+  [255,"0109438029","Refi Uca Soraya","Palembang, 9 Januari 2010",33.33,"Memadai",56.67,"Memadai"],
+  [256,"0112313232","Nadine Restinuari","Batam, 10 Januari 2011",40.00,"Memadai",56.67,"Memadai"],
+  [257,"0107337125","Chika Ayu Putri","Batam, 25 September 2010",33.33,"Memadai",46.67,"Kurang"],
+  [258,"0106645436","Zahra Adelia","Batam, 27 Desember 2010",53.33,"Memadai",76.67,"Baik"],
+  [259,"0102194298","Annisa Revilia Ridani","Batam, 7 Oktober 2010",23.33,"Kurang",50.00,"Memadai"],
+  [260,"0112554092","Hizkia Tika Aurel Marpaung","Batam, 2 Mei 2011",56.67,"Baik",80.00,"Baik"],
+  [261,"3118742986","M. Celvin Karisman","Batam, 19 Februari 2011",56.67,"Baik",86.67,"Baik"],
+  [262,"3110073127","Theresia Renita Ardani Panjaitan","Batam, 7 November 2011",40.00,"Memadai",40.00,"Kurang"],
+  [263,"0117518226","Riska Septiana","Batam, 10 September 2011",36.67,"Memadai",73.33,"Memadai"],
+  [264,"0103683704","Isma Pratiwi","Batam, 5 Oktober 2010",63.33,"Baik",60.00,"Memadai"],
+  [265,"0109100030","Zahra Zakia","Batam, 11 April 2010",43.33,"Memadai",86.67,"Baik"],
+  [266,"0128410078","Anjani Nahwa Sani","Batam, 19 Maret 2012",40.00,"Memadai",70.00,"Memadai"],
+  [267,"0107335205","Mohammad Noer Fadhillah Parera","Batam, 12 Januari 2010",23.33,"Kurang",76.67,"Baik"],
+  [268,"0114800982","Gio Wesley Parera","Ambon, 19 Desember 2011",30.00,"Kurang",73.33,"Memadai"],
+  [269,"0104646090","Dzulaika Assalwa Jumayya","Batam, 9 Juni 2010",23.33,"Kurang",40.00,"Kurang"],
+  [270,"0111353396","Danu Valentino","Batam, 14 Februari 2011",53.33,"Memadai",70.00,"Memadai"],
+  [271,"0106346766","Jihad Habibie Sofyan","Batam, 24 September 2010",36.67,"Memadai",73.33,"Memadai"],
+  [272,"0102401651","Evandi Adrisyah","Sekodi, 14 Oktober 2010",56.67,"Baik",33.33,"Kurang"],
+  [273,"0108315894","Tsaqif Arkan Nasution","Batam, 28 Agustus 2010",40.00,"Memadai",56.67,"Memadai"],
+  [274,"0114019997","Ulfiatul Khaira","Batam, 23 Januari 2011",30.00,"Kurang",80.00,"Baik"],
+  [275,"0104428379","Galang Ramadhan","Batam, 12 Agustus 2010",26.67,"Kurang",53.33,"Memadai"],
+  [276,"0115070029","Hazkel Twou Tadashi Silitonga","Batam, 15 Oktober 2011",53.33,"Memadai",90.00,"Baik"],
+  [277,"0093366840","Fauzan Nur Arifin","Batam, 3 Juli 2009",46.67,"Memadai",93.33,"Baik"],
+  [278,"0105868408","Natasya Sinaga","Batam, 23 Desember 2010",46.67,"Memadai",83.33,"Baik"],
+  [279,"0111423030","Barack Adinata Siregar","Batam, 29 September 2011",50.00,"Memadai",80.00,"Baik"],
+  [280,"0117828313","Aurelia Sakina","Medan, 25 Februari 2011",30.00,"Kurang",53.33,"Memadai"],
+  [281,"0102286213","Virginia Gischa Ayu","Batam, 7 Juli 2010",30.00,"Kurang",66.67,"Memadai"],
+  [282,"0104262960","Fajar Situmorang","Batam, 5 September 2010",50.00,"Memadai",83.33,"Baik"],
+  [283,"0108461953","Muhammad Ravel Aleinsky Wijaya","Batam, 30 Mei 2010",30.00,"Kurang",26.67,"Kurang"],
+  [284,"0108016780","Zasqia Aisyah Putri","Batam, 27 Desember 2010",50.00,"Memadai",70.00,"Memadai"],
+  [285,"0108792041","Muhammad Mesi Syailin","Batam, 14 Mei 2010",50.00,"Memadai",76.67,"Baik"],
+  [286,"0105756680","Inneke Tasyara Y","Batam, 10 Agustus 2010",33.33,"Memadai",73.33,"Memadai"],
+  [287,"0103413998","Raihan Alfarizi","Batam, 31 Oktober 2010",46.67,"Memadai",60.00,"Memadai"],
+  [288,"0096453001","Alfian","Tanjungbalai, 27 Juli 2009",36.67,"Memadai",53.33,"Memadai"],
+  [289,"0106251366","Elvi Trisnawati","Batam, 25 Januari 2010",40.00,"Memadai",50.00,"Memadai"],
+  [290,"0106606929","Doni Agustin Sirait","Batam, 25 Agustus 2010",43.33,"Memadai",70.00,"Memadai"],
+  [291,"0104073955","Ramadan Saputra","Batam, 31 Agustus 2010",26.67,"Kurang",43.33,"Kurang"],
+  [292,"0104516402","Raditya Risco Pradana","Batam, 19 Juni 2010",40.00,"Memadai",86.67,"Baik"],
+  [293,"0104751837","RIFA APRILLIANA","LANGKAT, 26 April 2010",46.67,"Memadai",70.00,"Memadai"],
+  [294,"0106338368","Muhammad Alif Ervana","Batam, 19 Juni 2010",46.67,"Memadai",80.00,"Baik"],
+  [295,"0101571360","Muhammad Andrean Tysta","Curup, 15 September 2010",36.67,"Memadai",46.67,"Kurang"],
+  [296,"0109934762","Ahmad Fadil","Batam, 8 Juni 2010",53.33,"Memadai",83.33,"Baik"],
+  [297,"0105853066","Hesti Morina","Batam, 10 Februari 2010",43.33,"Memadai",63.33,"Memadai"],
+  [298,"0101897162","ABIYYI APRIL DIANSYAH RAMBE","BATAM, 17 April 2010",40.00,"Memadai",70.00,"Memadai"],
+  [299,"0117217615","Warda Syafira","Batam, 21 Juli 2011",33.33,"Memadai",70.00,"Memadai"],
+  [300,"3111288422","Fathurrahman Talla","Batam, 12 Januari 2011",33.33,"Memadai",66.67,"Memadai"],
+  [301,"0108632523","Mukhammad Salman Ramdhani","Batam, 22 Agustus 2010",36.67,"Memadai",40.00,"Kurang"],
+  [302,"0102308109","Muhammad Faiz Defryan","Batam, 20 Mei 2010",46.67,"Memadai",83.33,"Baik"],
+  [303,"0102197144","Nathasya Ilhami Putri","Batam, 5 Desember 2010",40.00,"Memadai",83.33,"Baik"],
+  [304,"0113130922","ECHA CALISTA SARAGIH","Batam, 12 Juli 2011",36.67,"Memadai",60.00,"Memadai"],
+  [305,"0117419501","Wahyu Febrian","Pulau Cengkui, 17 Februari 2011",40.00,"Memadai",60.00,"Memadai"],
+  [306,"0109548975","Muhammad Zaki Saputra","Batam, 24 Juni 2010",33.33,"Memadai",43.33,"Kurang"],
+  [307,"0105479069","Nabila Zaskya","Pekanbaru, 25 Januari 2010",43.33,"Memadai",53.33,"Memadai"],
+  [308,"0106177897","Ghina Zalfa","Langkat, 7 Juni 2010",53.33,"Memadai",90.00,"Baik"],
+  [309,"0106034322","Khairan Jazlina Victor","Batam, 15 Juli 2010",26.67,"Kurang",73.33,"Memadai"],
+  [310,"0103303693","Sherin Shasryani","Batam, 8 September 2010",43.33,"Memadai",53.33,"Memadai"],
+  [311,"0103594554","Iqbal Fairuz Putra Nadim","Cilacap, 6 November 2010",36.67,"Memadai",43.33,"Kurang"],
+  [312,"0113656410","Yanty Siburian","Batam, 5 Oktober 2011",43.33,"Memadai",76.67,"Baik"],
+  [313,"3111279760","Niken Marbun","Batam, 6 Mei 2011",43.33,"Memadai",96.67,"Baik-Istimewa"],
+  [314,"0119548195","Nabila Wulandari Kurnia Putri","Batam, 20 Februari 2011",43.33,"Memadai",76.67,"Baik"],
+  [315,"0106698106","Nur Safitri","Batam, 3 November 2010",20.00,"Kurang",40.00,"Kurang"],
+  [316,"0116927032","Shakyla Amanda","Batam, 30 Maret 2011",53.33,"Memadai",80.00,"Baik"],
+  [317,"0108200495","Lutfi Pandu Aryo Sandy","Bahliran, 17 Desember 2010",40.00,"Memadai",70.00,"Memadai"],
+  [318,"0095206874","Cinta Tusynta Jaya","Batam, 9 Agustus 2009",30.00,"Kurang",73.33,"Memadai"],
+  [319,"0113778128","Raihana Putri Harmon","Batam, 21 Januari 2011",23.33,"Kurang",80.00,"Baik"],
+  [320,"0106964728","Jane Queenly","Batam, 9 Juni 2010",56.67,"Baik",60.00,"Memadai"],
+  [321,"0117933481","Leo Rencus Manalu","Batam, 12 Januari 2011",30.00,"Kurang",60.00,"Memadai"],
+  [322,"0104559401","Farra Nur Arista","Batam, 27 Mei 2010",50.00,"Memadai",86.67,"Baik"],
+  [323,"0101752951","Gavriel Yeoman Sebastian","Batam, 25 Maret 2010",46.67,"Memadai",76.67,"Baik"],
+  [324,"0108711370","Alviano Triyadi Dirgantara","Batam, 31 Desember 2010",53.33,"Memadai",80.00,"Baik"],
+  [325,"0106935831","Zakki Darmawan","Batam, 3 Oktober 2010",66.67,"Baik",83.33,"Baik"],
+  [326,"0105544041","Tifani Syafitri","Gunung Agung, 11 Juli 2010",40.00,"Memadai",70.00,"Memadai"],
+  [327,"0094401067","Sani Fajar Ramadani","Kendal, 28 September 2009",26.67,"Kurang",60.00,"Memadai"],
+  [328,"0105565165","Muhammad Bagas Baihaqi","Malang, 3 Mei 2010",30.00,"Kurang",66.67,"Memadai"],
+  [329,"0102259927","Viola Angel Sinurat","Batam, 20 Juli 2010",36.67,"Memadai",73.33,"Memadai"],
+  [330,"0115474256","Dini Batrisyia","Batam, 15 Mei 2011",40.00,"Memadai",76.67,"Baik"],
+  [331,"0101562399","Azri Putra","Batam, 14 Oktober 2010",40.00,"Memadai",60.00,"Memadai"]
+];
+// Build student objects
+const students = RAW.map(r => ({
+  no: r[0], nisn: r[1], name: r[2], dob: r[3],
+  mtk: r[4], mtkCat: r[5],
+  bi: r[6], biCat: r[7],
+  avg: Math.round((r[4]+r[6])/2 * 100) / 100,
+  total: Math.round((r[4]+r[6]) * 100) / 100
+}));
+
+// ── STATS ──
+const total = students.length;
+const avgMtk = (students.reduce((s,x)=>s+x.mtk,0)/total).toFixed(2);
+const avgBi  = (students.reduce((s,x)=>s+x.bi,0)/total).toFixed(2);
+const avgAll = (students.reduce((s,x)=>s+x.avg,0)/total).toFixed(2);
+const topMtk = [...students].sort((a,b)=>b.mtk-a.mtk)[0];
+const topBi  = [...students].sort((a,b)=>b.bi-a.bi)[0];
+
+// Fill compact header
+document.getElementById('total-count').textContent = total;
+document.getElementById('avg-mtk').textContent = avgMtk;
+document.getElementById('avg-bi').textContent  = avgBi;
+document.getElementById('avg-all').textContent = avgAll;
+
+// Fill stats tab
+document.getElementById('sm-avg-mtk').textContent = avgMtk;
+document.getElementById('sm-avg-bi').textContent  = avgBi;
+document.getElementById('sm-avg-all').textContent = avgAll;
+document.getElementById('sm-max-mtk').textContent = topMtk.mtk;
+document.getElementById('sm-max-mtk-name').textContent = topMtk.name;
+document.getElementById('sm-max-bi').textContent  = topBi.bi;
+document.getElementById('sm-max-bi-name').textContent  = topBi.name;
+
+// Fill splash stats
+document.getElementById('sp-mtk').textContent = avgMtk;
+document.getElementById('sp-bi').textContent  = avgBi;
+document.getElementById('sp-avg').textContent = avgAll;
+
+// distribution
+let cntBI=0,cntBaik=0,cntMemadai=0,cntKurang=0;
+students.forEach(s=>{
+  [s.mtkCat,s.biCat].forEach(c=>{
+    if(c==='Baik-Istimewa') cntBI++;
+    else if(c==='Baik') cntBaik++;
+    else if(c==='Memadai') cntMemadai++;
+    else cntKurang++;
+  });
+});
+document.getElementById('cnt-bi').textContent = cntBI;
+document.getElementById('cnt-baik').textContent = cntBaik;
+document.getElementById('cnt-memadai').textContent = cntMemadai;
+document.getElementById('cnt-kurang').textContent = cntKurang;
+const cntBaikStudents = students.filter(s=>s.mtkCat==='Baik'||s.mtkCat==='Baik-Istimewa'||s.biCat==='Baik'||s.biCat==='Baik-Istimewa').length;
+document.getElementById('sm-count-baik').textContent = cntBaikStudents;
+
+// ── SPLASH EXIT ──
+function exitSplash(){
+  const splash = document.getElementById('intro-splash');
+  const main   = document.getElementById('main-content');
+  splash.classList.add('exiting');
+  setTimeout(()=>{
+    splash.style.display = 'none';
+    main.classList.add('visible');
+    document.body.style.overflow = '';
+  }, 680);
+}
+
+// Auto-exit on scroll
+let scrollHandled = false;
+window.addEventListener('wheel', ()=>{ if(!scrollHandled){ scrollHandled=true; exitSplash(); }}, {passive:true});
+window.addEventListener('touchmove', ()=>{ if(!scrollHandled){ scrollHandled=true; exitSplash(); }}, {passive:true});
+
+// Auto-exit after 4s if user does nothing
+setTimeout(()=>{ if(!scrollHandled && document.getElementById('intro-splash').style.display!=='none'){ exitSplash(); } }, 4000);
+
+// Prevent body scroll while splash shown
+document.body.style.overflow = 'hidden';
+
+// ── TABLE ──
+const PER_PAGE = 30;
+let filtered = [...students];
+let currentPage = 1;
+let sortCol = null, sortDir = 1;
+let activeFilter = 'all';
+
+function catKey(cat){ return cat.replace(/\s+/g,'-'); }
+
+function catColor(cat){
+  if(cat==='Baik-Istimewa') return 'var(--baik-istimewa)';
+  if(cat==='Baik') return 'var(--baik)';
+  if(cat==='Memadai') return 'var(--memadai)';
+  return 'var(--kurang)';
+}
+
+function renderTable(){
+  const tbody = document.getElementById('table-body');
+  const start = (currentPage-1)*PER_PAGE;
+  const slice = filtered.slice(start, start+PER_PAGE);
+  const empty = document.getElementById('empty-state');
+  if(!filtered.length){
+    tbody.innerHTML='';
+    empty.style.display='block';
+    document.getElementById('result-count').innerHTML='';
+    renderPagination();
+    return;
+  }
+  empty.style.display='none';
+  tbody.innerHTML = slice.map(s=>{
+    const avgColor = s.avg >= 70 ? 'var(--baik)' : s.avg >= 50 ? 'var(--memadai)' : 'var(--kurang)';
+    return `<tr>
+      <td class="no-cell">${s.no}</td>
+      <td class="nisn-cell">${s.nisn}</td>
+      <td class="name-cell">${s.name}</td>
+      <td style="white-space:nowrap">
+        <span class="score-num" style="color:${catColor(s.mtkCat)}">${s.mtk}</span>
+        <span class="cat-badge cat-${catKey(s.mtkCat)}" style="margin-left:5px">${s.mtkCat}</span>
+      </td>
+      <td style="white-space:nowrap">
+        <span class="score-num" style="color:${catColor(s.biCat)}">${s.bi}</span>
+        <span class="cat-badge cat-${catKey(s.biCat)}" style="margin-left:5px">${s.biCat}</span>
+      </td>
+      <td><span class="score-num" style="color:${avgColor}">${s.avg.toFixed(2)}</span></td>
+    </tr>`;
+  }).join('');
+  renderPagination();
+  document.getElementById('result-count').innerHTML =
+    `Menampilkan <b>${start+1}–${Math.min(start+PER_PAGE,filtered.length)}</b> dari <b>${filtered.length}</b> peserta`;
+}
+
+function renderPagination(){
+  const pages = Math.ceil(filtered.length/PER_PAGE);
+  const pag = document.getElementById('pagination');
+  if(pages<=1){ pag.innerHTML=''; return; }
+  let html = `<button class="pag-btn ${currentPage===1?'disabled':''}" onclick="goPage(${currentPage-1})">‹</button>`;
+  for(let i=1;i<=pages;i++){
+    if(pages>7 && i>2 && i<pages-1 && Math.abs(i-currentPage)>1){
+      if(i===3||i===pages-2) html+=`<span class="pag-info">…</span>`;
+      continue;
+    }
+    html+=`<button class="pag-btn ${i===currentPage?'active':''}" onclick="goPage(${i})">${i}</button>`;
+  }
+  html+=`<button class="pag-btn ${currentPage===pages?'disabled':''}" onclick="goPage(${currentPage+1})">›</button>`;
+  pag.innerHTML = html;
+}
+
+function goPage(p){
+  currentPage=p;
+  renderTable();
+  document.getElementById('data-section').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function showPicker(list){
+  const picker = document.getElementById('name-picker');
+  picker.style.display = 'block';
+  const byAvg = [...students].sort((a,b)=> b.avg-a.avg || a.name.localeCompare(b.name,'id'));
+  picker.innerHTML = `
+    <div class="picker-header">Ditemukan <b>${list.length}</b> peserta — pilih salah satu untuk melihat detail</div>
+    ${list.map(s=>{
+      const initials = s.name.trim().split(/\s+/).slice(0,2).map(w=>w[0].toUpperCase()).join('');
+      const avgColor = s.avg>=70?'var(--baik)':s.avg>=50?'var(--memadai)':'var(--kurang)';
+      const rankAvg = byAvg.findIndex(x=>x.nisn===s.nisn)+1;
+      const rankIcon = rankAvg===1?'🥇':rankAvg===2?'🥈':rankAvg===3?'🥉':rankAvg<=10?'🏅':'';
+      const rankColor = rankAvg===1?'var(--gold)':rankAvg===2?'var(--silver)':rankAvg===3?'var(--bronze)':rankAvg<=10?'var(--baik)':'var(--muted)';
+      return `<div class="picker-item" onclick="pickStudent('${s.nisn}', this)">
+        <div class="picker-avatar">${initials}</div>
+        <div>
+          <div class="picker-name">${s.name}</div>
+          <div class="picker-meta">NISN ${s.nisn} · No. ${s.no} · ${s.dob}</div>
+        </div>
+        <div class="picker-score">
+          <div class="picker-score-val" style="color:${avgColor}">${s.avg.toFixed(2)}</div>
+          <div class="picker-score-lbl">rata-rata</div>
+          <div style="font-size:10px;font-family:'DM Mono',monospace;color:${rankColor};margin-top:3px;font-weight:700">${rankIcon} Rank #${rankAvg}</div>
+        </div>
+      </div>`;
+    }).join('')}`;
+}
+
+function hidePicker(){
+  const picker = document.getElementById('name-picker');
+  picker.style.display = 'none';
+  picker.innerHTML = '';
+}
+
+function pickStudent(nisn, el){
+  document.querySelectorAll('.picker-item').forEach(i=>i.classList.remove('selected'));
+  el.classList.add('selected');
+  const s = students.find(x=>x.nisn===nisn);
+  showDetailCard(s);
+  updateCompareHint(s);
+}
+
+function showDetailCard(s){
+  const overlay = document.getElementById('search-result-overlay');
+  if(!s){ overlay.classList.remove('open'); document.body.style.overflow=''; return; }
+
+  document.getElementById('src-name').textContent = s.name;
+  document.getElementById('src-info').textContent = `NISN: ${s.nisn} · No. Urut ${s.no} · ${s.dob}`;
+
+  document.getElementById('src-mtk').textContent = s.mtk;
+  document.getElementById('src-mtk').style.color = catColor(s.mtkCat);
+  document.getElementById('src-mtk-cat').innerHTML = `<span class="cat-badge cat-${catKey(s.mtkCat)}">${s.mtkCat}</span>`;
+  document.getElementById('src-bi').textContent = s.bi;
+  document.getElementById('src-bi').style.color = catColor(s.biCat);
+  document.getElementById('src-bi-cat').innerHTML = `<span class="cat-badge cat-${catKey(s.biCat)}">${s.biCat}</span>`;
+
+  const avgColor = s.avg >= 70 ? 'var(--baik)' : s.avg >= 50 ? 'var(--memadai)' : 'var(--kurang)';
+  document.getElementById('src-avg').textContent = s.avg.toFixed(2);
+  document.getElementById('src-avg').style.color = avgColor;
+  const totalColor = s.total>=140?'var(--baik)':s.total>=100?'var(--memadai)':'var(--kurang)';
+  document.getElementById('src-total').textContent = s.total.toFixed(2);
+  document.getElementById('src-total').style.color = totalColor;
+
+  // Ranks
+  const byAvg = [...students].sort((a,b)=> b.total-a.total || a.name.localeCompare(b.name,'id'));
+  const byMtk = [...students].sort((a,b)=> b.mtk-a.mtk || a.name.localeCompare(b.name,'id'));
+  const byBi  = [...students].sort((a,b)=> b.bi-a.bi   || a.name.localeCompare(b.name,'id'));
+  const rankAvg = byAvg.findIndex(x=>x.nisn===s.nisn)+1;
+  const rankMtk = byMtk.findIndex(x=>x.nisn===s.nisn)+1;
+  const rankBi  = byBi.findIndex(x=>x.nisn===s.nisn)+1;
+
+  document.getElementById('src-rank-info').textContent = `Peringkat ke-${rankAvg} dari ${students.length} peserta`;
+
+  function rankColorClass(r){ return r===1?'gold':r===2?'silver':r===3?'bronze':r<=10?'baik':'normal'; }
+  function cardClass(r){ return r===1?'rank-top1':r<=3?'rank-top3':r<=10?'rank-top10':''; }
+  function rankIcon(r){ return r===1?'🥇':r===2?'🥈':r===3?'🥉':r<=10?'🏅':'📊'; }
+
+  const lbRanks = [
+    { label: 'Peringkat Jumlah TKA', rank: rankAvg, icon: rankIcon(rankAvg) },
+    { label: 'Peringkat MTK',        rank: rankMtk, icon: rankIcon(rankMtk) },
+    { label: 'Peringkat Bhs. Indo',  rank: rankBi,  icon: rankIcon(rankBi)  },
+  ];
+  document.getElementById('src-lb-ranks').innerHTML = lbRanks.map(d=>`
+    <div class="src-lb-rank-card ${cardClass(d.rank)}">
+      <div class="src-lb-rank-icon">${d.icon}</div>
+      <div class="src-lb-rank-body">
+        <div class="src-lb-rank-label">${d.label}</div>
+        <div class="src-lb-rank-num ${rankColorClass(d.rank)}">#${d.rank}</div>
+        <div class="src-lb-rank-sub">dari ${students.length} siswa</div>
+      </div>
+    </div>`).join('');
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetailModal(event){
+  if(event && !event.target.closest('#search-result-overlay')) return;
+  if(event && event.target.closest('#search-result-card')) return;
+  document.getElementById('search-result-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeDetailModal(); } });
+
+function applyFilters(){
+  const q = document.getElementById('search-name').value.toLowerCase().trim();
+  const nomorQ = document.getElementById('search-nomor').value.trim();
+  filtered = students.filter(s=>{
+    const matchQ = !q || s.name.toLowerCase().includes(q) || s.nisn.includes(q);
+    const matchNomor = !nomorQ || String(s.no).includes(nomorQ);
+    const matchCat  = activeFilter==='all' || s.mtkCat===activeFilter || s.biCat===activeFilter;
+    return matchQ && matchNomor && matchCat;
+  });
+  if(sortCol) filtered.sort((a,b)=>(a[sortCol]>b[sortCol]?1:-1)*sortDir);
+  currentPage=1;
+  renderTable();
+
+  // ── Picker / detail card logic ──
+  // Always show picker list — card only opens on click
+  if(q || nomorQ){
+    const searchMatches = students.filter(s=>{
+      const matchQ = !q || s.name.toLowerCase().includes(q) || s.nisn.includes(q);
+      const matchNomor = !nomorQ || String(s.no).includes(nomorQ);
+      return matchQ && matchNomor;
+    });
+    if(searchMatches.length > 0 && searchMatches.length <= 50){
+      showPicker(searchMatches);
+      document.getElementById('search-result-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      updateCompareHint(null);
+    } else if(searchMatches.length > 50){
+      hidePicker();
+      document.getElementById('search-result-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      updateCompareHint(null);
+    } else {
+      hidePicker();
+      document.getElementById('search-result-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      updateCompareHint(null);
+    }
+  } else {
+    hidePicker();
+    document.getElementById('search-result-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+    updateCompareHint(null);
+  }
+}
+
+document.getElementById('search-name').addEventListener('input', applyFilters);
+document.getElementById('search-nomor').addEventListener('input', applyFilters);
+
+let compareHintStudent = null;
+function updateCompareHint(s){
+  const hint = document.getElementById('search-compare-hint');
+  const hintText = document.getElementById('compare-hint-text');
+  if(!s){ hint.style.display='none'; compareHintStudent=null; return; }
+  compareHintStudent = s;
+  hint.style.display='flex';
+  hintText.textContent = `${s.name} ditemukan — ingin bandingkan dengan siswa lain?`;
+}
+function goToCompare(){
+  if(!compareHintStudent) return;
+  showTab('compare');
+  const s = compareHintStudent;
+  cmpSlots[0] = s;
+  renderCmpSlots();
+  setTimeout(()=>document.getElementById('compare-section').scrollIntoView({behavior:'smooth',block:'start'}),150);
+}
+
+function goCompare(){
+  showTab('compare');
+  setTimeout(()=>document.getElementById('compare-section').scrollIntoView({behavior:'smooth',block:'start'}),150);
+}
+
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    filterBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    applyFilters();
+  });
+});
+
+function sortBy(col){
+  if(sortCol===col) sortDir*=-1; else { sortCol=col; sortDir=-1; }
+  document.querySelectorAll('th[data-col]').forEach(th=>th.classList.remove('sorted'));
+  document.querySelector(`th[data-col="${col}"]`).classList.add('sorted');
+  applyFilters();
+}
+
+// ── TABS ──
+function showTab(tab){
+  ['data','leaderboard','stats','compare'].forEach(t=>{
+    const el = document.getElementById(t+'-section');
+    if(el) el.style.display = t===tab ? 'block' : 'none';
+  });
+  // Reset semua tab aktif
+  ['data','lb','stats'].forEach(t=>{
+    const btn = document.getElementById('tab-'+t);
+    if(btn) btn.classList.remove('active');
+  });
+  // Set aktif hanya untuk tab yang ada di bar (bukan compare)
+  if(tab==='data')        document.getElementById('tab-data')?.classList.add('active');
+  else if(tab==='leaderboard') document.getElementById('tab-lb')?.classList.add('active');
+  else if(tab==='stats')  document.getElementById('tab-stats')?.classList.add('active');
+  // compare tidak punya tab di bar, jadi tidak ada yang aktif
+  if(tab==='leaderboard') renderLeaderboard();
+  if(tab==='stats') renderDistChart();
+  if(tab==='compare') renderCmpSlots();
+  // Scroll ke tabs bar agar section langsung terlihat
+  const tabsBar = document.getElementById('tabs-bar');
+  if(tabsBar){
+    const offset = tabsBar.getBoundingClientRect().top + window.scrollY - 12;
+    window.scrollTo({ top: offset, behavior: 'smooth' });
+  }
+}
+
+// ── LEADERBOARD ──
+const LB_PER_PAGE = 20;
+const lbState = {
+  avg: { page: 1, query: '' },
+  mtk: { page: 1, query: '' },
+  bi:  { page: 1, query: '' }
+};
+
+function renderLeaderboard(){
+  const byAvg = [...students].sort((a,b)=> b.total-a.total || a.name.localeCompare(b.name,'id'));
+  const byMtk = [...students].sort((a,b)=> b.mtk-a.mtk || a.name.localeCompare(b.name,'id'));
+  const byBi  = [...students].sort((a,b)=> b.bi-a.bi   || a.name.localeCompare(b.name,'id'));
+  const boards = [
+    { title:'Top Nilai TKA', sub:'Jumlah nilai MTK + Bhs. Indonesia', icon:'🏆', list:byAvg, key:'total', id:'avg' },
+    { title:'Top Matematika', sub:'Nilai tertinggi Matematika', icon:'📐', list:byMtk, key:'mtk', id:'mtk' },
+    { title:'Top Bhs. Indonesia', sub:'Nilai tertinggi Bhs. Indonesia', icon:'📖', list:byBi, key:'bi', id:'bi' }
+  ];
+  const grid = document.getElementById('lb-grid');
+  grid.innerHTML = boards.map(board=>{
+    return `<div class="lb-card">
+      <div class="lb-header">
+        <span class="lb-icon">${board.icon}</span>
+        <div><div class="lb-title">${board.title}</div><div class="lb-sub">${board.sub}</div></div>
+      </div>
+      <div class="lb-search-wrap">
+        <input class="lb-search-input" id="lb-search-${board.id}" placeholder="🔍  Cari nama / NISN..." oninput="filterLb('${board.id}', this.value)">
+        <button class="lb-clear-btn" id="lb-clear-${board.id}" onclick="clearLbSearch('${board.id}')" title="Hapus">✕</button>
+      </div>
+      <div id="lb-list-${board.id}"></div>
+      <div id="lb-pag-${board.id}" class="lb-pag"></div>
+    </div>`;
+  }).join('');
+
+  boards.forEach(board => renderLbBoard(board));
+}
+
+function renderLbBoard(board){
+  const byAvg = [...students].sort((a,b)=> b.total-a.total || a.name.localeCompare(b.name,'id'));
+  const byMtk = [...students].sort((a,b)=> b.mtk-a.mtk || a.name.localeCompare(b.name,'id'));
+  const byBi  = [...students].sort((a,b)=> b.bi-a.bi   || a.name.localeCompare(b.name,'id'));
+  const allLists = { avg: byAvg, mtk: byMtk, bi: byBi };
+
+  const state = lbState[board.id];
+  const fullList = allLists[board.id];
+  const q = state.query.toLowerCase().trim();
+  // Filter with rank preserved from full list
+  const filtered = q
+    ? fullList.filter(s => s.name.toLowerCase().includes(q) || s.nisn.includes(q))
+    : fullList;
+
+  const totalPages = Math.ceil(filtered.length / LB_PER_PAGE);
+  const start = (state.page - 1) * LB_PER_PAGE;
+  const slice = filtered.slice(start, start + LB_PER_PAGE);
+
+  const listEl = document.getElementById('lb-list-'+board.id);
+  const pagEl  = document.getElementById('lb-pag-'+board.id);
+
+  if(!filtered.length){
+    listEl.innerHTML = `<div class="lb-empty">Tidak ada siswa ditemukan</div>`;
+    pagEl.innerHTML = '';
+    return;
+  }
+
+  listEl.innerHTML = slice.map(s=>{
+    // Real rank in full sorted list
+    const rank = fullList.findIndex(x=>x.nisn===s.nisn)+1;
+    const rankClass = rank===1?'rank-1':rank===2?'rank-2':rank===3?'rank-3':'rank-n';
+    const scoreColor = rank===1?'gold':rank===2?'silver':rank===3?'bronze':'';
+    const displayScore = board.key==='total' ? s.total.toFixed(2) : s[board.key];
+    return `<div class="lb-item">
+      <div class="lb-rank ${rankClass}">${rank}</div>
+      <div class="lb-info">
+        <div class="lb-name">${s.name}</div>
+        <div class="lb-detail">NISN ${s.nisn} · Total TKA ${s.total.toFixed(2)}</div>
+      </div>
+      <div class="lb-score ${scoreColor}">${displayScore}</div>
+    </div>`;
+  }).join('');
+
+  // Pagination
+  if(totalPages <= 1){ pagEl.innerHTML=''; return; }
+  let pHtml = `<button class="pag-btn ${state.page===1?'disabled':''}" onclick="lbPage('${board.id}',${state.page-1})">‹</button>`;
+  // Show limited pages
+  for(let i=1;i<=totalPages;i++){
+    if(totalPages>7 && i>2 && i<totalPages-1 && Math.abs(i-state.page)>1){
+      if(i===3||i===totalPages-2) pHtml+=`<span class="pag-info">…</span>`;
+      continue;
+    }
+    pHtml+=`<button class="pag-btn ${i===state.page?'active':''}" onclick="lbPage('${board.id}',${i})">${i}</button>`;
+  }
+  pHtml+=`<button class="pag-btn ${state.page===totalPages?'disabled':''}" onclick="lbPage('${board.id}',${state.page+1})">›</button>`;
+  pHtml+=`<span class="pag-info">${filtered.length} siswa</span>`;
+  pagEl.innerHTML = pHtml;
+}
+
+function filterLb(boardId, val){
+  lbState[boardId].query = val;
+  lbState[boardId].page  = 1;
+  // Show/hide clear button
+  const clearBtn = document.getElementById('lb-clear-'+boardId);
+  if(clearBtn) clearBtn.style.display = val ? 'flex' : 'none';
+  const byAvg = [...students].sort((a,b)=> b.total-a.total || a.name.localeCompare(b.name,'id'));
+  const byMtk = [...students].sort((a,b)=> b.mtk-a.mtk || a.name.localeCompare(b.name,'id'));
+  const byBi  = [...students].sort((a,b)=> b.bi-a.bi   || a.name.localeCompare(b.name,'id'));
+  const boards = {
+    avg: { title:'Top Nilai TKA', sub:'Jumlah nilai MTK + Bhs. Indonesia', icon:'🏆', list:byAvg, key:'total', id:'avg' },
+    mtk: { title:'Top Matematika', sub:'Nilai tertinggi Matematika', icon:'📐', list:byMtk, key:'mtk', id:'mtk' },
+    bi:  { title:'Top Bhs. Indonesia', sub:'Nilai tertinggi Bhs. Indonesia', icon:'📖', list:byBi, key:'bi', id:'bi' }
+  };
+  renderLbBoard(boards[boardId]);
+}
+
+function clearLbSearch(boardId){
+  const input = document.getElementById('lb-search-'+boardId);
+  if(input) input.value = '';
+  filterLb(boardId, '');
+}
+
+function lbPage(boardId, page){
+  lbState[boardId].page = page;
+  const byAvg = [...students].sort((a,b)=> b.total-a.total || a.name.localeCompare(b.name,'id'));
+  const byMtk = [...students].sort((a,b)=> b.mtk-a.mtk || a.name.localeCompare(b.name,'id'));
+  const byBi  = [...students].sort((a,b)=> b.bi-a.bi   || a.name.localeCompare(b.name,'id'));
+  const boards = {
+    avg: { title:'Top Nilai TKA', sub:'Jumlah nilai MTK + Bhs. Indonesia', icon:'🏆', list:byAvg, key:'total', id:'avg' },
+    mtk: { title:'Top Matematika', sub:'Nilai tertinggi Matematika', icon:'📐', list:byMtk, key:'mtk', id:'mtk' },
+    bi:  { title:'Top Bhs. Indonesia', sub:'Nilai tertinggi Bhs. Indonesia', icon:'📖', list:byBi, key:'bi', id:'bi' }
+  };
+  renderLbBoard(boards[boardId]);
+  document.getElementById('leaderboard-section')?.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ── DIST CHART ──
+let distRendered = false;
+function renderDistChart(){
+  if(distRendered) return;
+  distRendered = true;
+  setTimeout(()=>{
+    const max = Math.max(cntBI,cntBaik,cntMemadai,cntKurang);
+    document.getElementById('bar-bi').style.height      = (cntBI/max*90)+'px';
+    document.getElementById('bar-baik').style.height    = (cntBaik/max*90)+'px';
+    document.getElementById('bar-memadai').style.height = (cntMemadai/max*90)+'px';
+    document.getElementById('bar-kurang').style.height  = (cntKurang/max*90)+'px';
+  }, 100);
+}
+
+// ── COMPARE (2–4 students) ──
+const CMP_COLORS = ['var(--accent)', '#f472b6', '#a78bfa', '#34d399'];
+const CMP_LABELS = ['A','B','C','D'];
+let cmpSlots = [null, null]; // start with 2 slots
+let cmpSlotCount = 2;
+
+function initials(name){ return name.trim().split(/\s+/).slice(0,2).map(w=>w[0]?.toUpperCase()||'').join(''); }
+
+function renderCmpSlots(){
+  const grid = document.getElementById('compare-slots-grid');
+  grid.style.gridTemplateColumns = '';
+  grid.className = 'compare-search-grid cmp-slots-' + cmpSlotCount;
+  grid.innerHTML = Array.from({length: cmpSlotCount}, (_, i) => {
+    const s = cmpSlots[i];
+    const label = 'Siswa ' + CMP_LABELS[i];
+    const dotStyle = `background:${CMP_COLORS[i]};box-shadow:0 0 6px ${CMP_COLORS[i]}88`;
+    const canRemove = i >= 2; // only allow removing slots C and D
+    return `<div class="compare-slot">
+      <div class="compare-slot-label" style="justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:8px"><span class="dot" style="${dotStyle}"></span>${label}</div>
+        ${canRemove ? `<button onclick="removeCmpSlot(${i})" style="background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.3);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--kurang);font-size:11px;line-height:1;padding:0;transition:all 0.2s" title="Hapus slot">✕</button>` : ''}
+      </div>
+      <div class="compare-input-wrap" id="cmp-wrap-${i}">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="compare-input" id="cmp-input-${i}" placeholder="Nama atau NISN..." autocomplete="off" oninput="onCmpInput(${i})">
+        <div class="compare-dropdown" id="cmp-dd-${i}"></div>
+      </div>
+      ${s ? `<div class="compare-selected-tag" id="cmp-tag-${i}">
+        <div class="compare-dd-avatar" style="background:linear-gradient(135deg,${CMP_COLORS[i]},${CMP_COLORS[(i+1)%CMP_COLORS.length]})">${initials(s.name)}</div>
+        <div style="min-width:0;flex:1">
+          <div style="font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.name}</div>
+          <div style="font-size:10px;color:var(--muted);font-family:'DM Mono',monospace">NISN ${s.nisn} · No.${s.no}</div>
+        </div>
+        <span class="remove-btn" onclick="clearCmpSlot(${i})" title="Hapus siswa ini">✕</span>
+      </div>` : ''}
+    </div>`;
+  }).join('');
+
+  // update add button
+  const addBtn = document.getElementById('add-slot-btn');
+  if(addBtn) addBtn.style.display = cmpSlotCount >= 4 ? 'none' : '';
+  const hint = document.getElementById('cmp-slot-count-hint');
+  if(hint){
+    const filled = cmpSlots.slice(0, cmpSlotCount).filter(Boolean).length;
+    hint.textContent = `${filled} dari ${cmpSlotCount} slot terisi · min 2, maks 4`;
+  }
+}
+
+function addCmpSlot(){
+  if(cmpSlotCount >= 4) return;
+  cmpSlotCount++;
+  cmpSlots.push(null);
+  renderCmpSlots();
+}
+
+function removeCmpSlot(i){
+  if(cmpSlotCount <= 2) return;
+  cmpSlots.splice(i, 1);
+  cmpSlotCount--;
+  renderCmpSlots();
+  document.getElementById('compare-result').style.display='none';
+}
+
+function clearCmpSlot(i){
+  cmpSlots[i] = null;
+  renderCmpSlots();
+  document.getElementById('compare-result').style.display='none';
+}
+
+function clearAllCmp(){
+  cmpSlotCount = 2;
+  cmpSlots = [null, null];
+  renderCmpSlots();
+  document.getElementById('compare-result').style.display='none';
+}
+
+function onCmpInput(i){
+  const q = document.getElementById('cmp-input-'+i).value.trim().toLowerCase();
+  const dd = document.getElementById('cmp-dd-'+i);
+  if(!dd) return;
+  if(q.length < 2){ dd.classList.remove('open'); dd.innerHTML=''; return; }
+  const matches = students.filter(s=>
+    s.name.toLowerCase().includes(q) || s.nisn.includes(q)
+  ).slice(0,8);
+  if(!matches.length){ dd.classList.remove('open'); dd.innerHTML=''; return; }
+  dd.innerHTML = matches.map(s=>{
+    const totalColor = s.total>=140?'var(--baik)':s.total>=100?'var(--memadai)':'var(--kurang)';
+    return `<div class="compare-dd-item" onclick="selectCmpStudent(${i},'${s.nisn}')">
+      <div class="compare-dd-avatar" style="background:linear-gradient(135deg,${CMP_COLORS[i]},${CMP_COLORS[(i+1)%CMP_COLORS.length]})">${initials(s.name)}</div>
+      <div class="compare-dd-info">
+        <div class="compare-dd-name">${s.name}</div>
+        <div class="compare-dd-meta">NISN ${s.nisn} · No.${s.no}</div>
+      </div>
+      <div class="compare-dd-score" style="color:${totalColor}">${s.total.toFixed(2)}</div>
+    </div>`;
+  }).join('');
+  dd.classList.add('open');
+}
+
+function selectCmpStudent(i, nisn){
+  const s = students.find(x=>x.nisn===nisn);
+  if(!s) return;
+  cmpSlots[i] = s;
+  const dd = document.getElementById('cmp-dd-'+i);
+  if(dd){ dd.classList.remove('open'); dd.innerHTML=''; }
+  const inp = document.getElementById('cmp-input-'+i);
+  if(inp) inp.value='';
+  renderCmpSlots();
+  // Do NOT auto-run compare — user must click the button
+}
+
+function runCompareBtn(){
+  const activeSl = cmpSlots.slice(0, cmpSlotCount).filter(Boolean);
+  if(activeSl.length < 2){
+    const hint = document.getElementById('cmp-slot-count-hint');
+    if(hint){ hint.textContent = '⚠️ Pilih minimal 2 siswa dulu!'; hint.style.color='var(--kurang)'; setTimeout(()=>{ hint.style.color=''; renderCmpSlots(); },2000); }
+    return;
+  }
+  renderCompare();
+}
+
+// legacy support for goToCompare
+function clearSlot(slot){
+  const i = slot==='a'?0:1;
+  clearCmpSlot(i);
+}
+
+// Compute rank among all students by total
+const rankedByTotal = [...students].sort((a,b)=>b.total-a.total || a.name.localeCompare(b.name,'id'));
+function getTotalRank(nisn){ return rankedByTotal.findIndex(x=>x.nisn===nisn)+1; }
+// Percentile: what % of students have total <= this student
+function getPercentile(total){
+  const below = students.filter(s=>s.total<=total).length;
+  return Math.round((below/students.length)*100);
+}
+
+function renderCompare(){
+  const activeSl = cmpSlots.slice(0, cmpSlotCount).filter(Boolean);
+  if(activeSl.length < 2){
+    document.getElementById('compare-result').style.display='none';
+    return;
+  }
+  const result = document.getElementById('compare-result');
+  result.style.display='block';
+
+  const ranks = activeSl.map(s=>getTotalRank(s.nisn));
+
+  // ── Player Cards ──
+  const playersRow = document.getElementById('cmp-players-row');
+  const isMobile = window.innerWidth <= 600;
+  const playerCols = isMobile && activeSl.length > 2 ? '1fr 1fr' : `repeat(${activeSl.length}, 1fr)`;
+  playersRow.style.gridTemplateColumns = playerCols;
+  playersRow.innerHTML = activeSl.map((s, idx)=>{
+    const rank = ranks[idx];
+    const rankColor = rank===1?'#f59e0b':rank<=3?'#94a3b8':rank<=10?'var(--baik)':'var(--muted)';
+    const isOverallWinner = activeSl.every((x,xi)=> xi===idx || s.total >= x.total) && activeSl.some((x,xi)=>xi!==idx && s.total > x.total);
+    return `<div class="cmp-player" style="border-right:${idx<activeSl.length-1?'1px solid var(--border)':'none'}">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,${CMP_COLORS[idx]},${CMP_COLORS[(idx+1)%CMP_COLORS.length]})"></div>
+      ${isOverallWinner?`<div class="cmp-winner-badge">🏆 UNGGUL</div>`:''}
+      <div class="cmp-player-avatar" style="background:linear-gradient(135deg,${CMP_COLORS[idx]},${CMP_COLORS[(idx+1)%CMP_COLORS.length]});box-shadow:0 4px 16px ${CMP_COLORS[idx]}44">${initials(s.name)}</div>
+      <div class="cmp-player-name">${s.name}</div>
+      <div class="cmp-player-meta">NISN ${s.nisn} · No.${s.no}</div>
+      <div class="cmp-player-rank" style="background:rgba(255,255,255,0.05);border:1px solid ${rankColor}33;color:${rankColor}">Peringkat #${rank} dari ${students.length}</div>
+    </div>`;
+  }).join('');
+
+  // ── Pie Donut Charts — 3 pies: MTK, BI, Total ──
+  function makePieDonutMulti(vals, colors){
+    const sum = vals.reduce((a,b)=>a+b,0) || 1;
+    const r = 34, cx = 50, cy = 50, circ = 2 * Math.PI * r;
+    let offset = 0;
+    const arcs = vals.map((v,i)=>{
+      const dash = (v/sum)*circ;
+      const arc = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${colors[i]}" stroke-width="9"
+        stroke-dasharray="${dash} ${circ-dash}" stroke-dashoffset="${-offset}" stroke-linecap="butt"/>`;
+      offset += dash;
+      return arc;
+    });
+    return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="9"/>
+      ${arcs.join('')}
+    </svg>`;
+  }
+
+  const pieDefs = [
+    { label:'Matematika', key:'mtk' },
+    { label:'Bhs. Indonesia', key:'bi' },
+    { label:'Jumlah TKA', key:'total' },
+  ];
+  document.getElementById('cmp-pie-row').innerHTML = pieDefs.map(pd=>{
+    const vals = activeSl.map(s=>s[pd.key]);
+    const colors = activeSl.map((_,i)=>CMP_COLORS[i]);
+    const maxVal = Math.max(...vals);
+    const winners = activeSl.filter(s=>s[pd.key]===maxVal);
+    const winnerNames = winners.map(s=>s.name.split(' ')[0]).join(', ');
+    const tie = winners.length > 1;
+    const winnerColor = tie ? 'var(--gold)' : CMP_COLORS[activeSl.findIndex(s=>s[pd.key]===maxVal)];
+    return `<div class="cmp-pie-card">
+      <div class="cmp-pie-label">${pd.label}</div>
+      <div class="cmp-pie-svg">
+        ${makePieDonutMulti(vals, colors)}
+      </div>
+      <div style="margin-top:8px;text-align:center">
+        <div class="cmp-pie-winner-score" style="color:${winnerColor}">${pd.key==='total'?maxVal.toFixed(2):maxVal}</div>
+        <div style="font-size:9px;color:${winnerColor};font-family:'DM Mono',monospace;font-weight:700;margin-top:3px">${tie?'⚖️ SERI':'✓ '+winnerNames}</div>
+      </div>
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px;justify-content:center">
+        ${activeSl.map((s,i)=>`<div style="font-size:9px;font-family:'DM Mono',monospace;color:${CMP_COLORS[i]};background:${CMP_COLORS[i]}18;border:1px solid ${CMP_COLORS[i]}44;padding:1px 6px;border-radius:100px">${CMP_LABELS[i]}: ${pd.key==='total'?s[pd.key].toFixed(2):s[pd.key]}</div>`).join('')}
+      </div>
+      ${tie?`<div class="cmp-pie-tie-badge">= SERI</div>`:''}
+    </div>`;
+  }).join('');
+
+  // ── Score Rows ──
+  const scoreRows = [
+    { label:'Matematika', key:'mtk', catKey:'mtkCat' },
+    { label:'Bhs. Indonesia', key:'bi', catKey:'biCat' },
+    { label:'Jumlah TKA', key:'total', catKey:null },
+  ];
+  const rowsEl = document.getElementById('cmp-rows');
+  rowsEl.innerHTML = scoreRows.map(row=>{
+    const vals = activeSl.map(s=>s[row.key]);
+    const maxV = Math.max(...vals);
+    const cols = `repeat(${activeSl.length+1},1fr)`;
+    const cells = activeSl.map((s,i)=>{
+      const v = s[row.key];
+      const isWinner = v===maxV;
+      const col = row.catKey ? catColor(s[row.catKey]) : (v>=140?'var(--baik)':v>=100?'var(--memadai)':'var(--kurang)');
+      const cat = row.catKey ? `<div class="cmp-val-sub">${s[row.catKey]}</div>` : '';
+      const pct = (v/(row.key==='total'?200:100)*100).toFixed(0);
+      return `<div class="cmp-val ${isWinner?'cmp-val-winner':''}" style="color:${col};${isWinner?`box-shadow:inset 2px 0 0 ${CMP_COLORS[i]}66;background:${CMP_COLORS[i]}0a`:''};border-right:1px solid rgba(99,179,255,0.06)">
+        <span>${row.key==='total'?v.toFixed(2):v}</span>${cat}
+        ${isWinner?`<div style="font-size:8px;color:${CMP_COLORS[i]};font-family:'DM Mono',monospace;font-weight:700">✓ UNGGUL</div>`:''}
+        <div class="cmp-bar-visual"><div class="cmp-bar-fill" style="width:${pct}%;background:${col};"></div></div>
+      </div>`;
+    }).join('');
+    return `<div style="display:grid;grid-template-columns:${cols};border-bottom:1px solid rgba(99,179,255,0.06)">
+      ${cells}
+      <div class="cmp-row-label">${row.label}</div>
+    </div>`;
+  }).join('');
+
+  // ── Percentile Markers ──
+  const allTotals = students.map(s=>s.total).sort((a,b)=>a-b);
+  const minT = allTotals[0], maxT = allTotals[allTotals.length-1];
+  const rangeT = maxT - minT || 1;
+  const markersContainer = document.getElementById('pct-markers-row');
+  markersContainer.innerHTML = activeSl.map((s,i)=>{
+    const pos = ((s.total - minT) / rangeT * 92 + 4).toFixed(1);
+    return `<div class="pct-marker" style="background:${CMP_COLORS[i]};box-shadow:0 2px 8px ${CMP_COLORS[i]}88;left:${pos}%" id="pct-marker-${i}">${CMP_LABELS[i]}</div>`;
+  }).join('');
+  const legendRow = document.getElementById('pct-legend-row');
+  legendRow.innerHTML = activeSl.map((s,i)=>`
+    <div class="cmp-legend-item"><div class="cmp-legend-dot" style="background:${CMP_COLORS[i]}"></div><span>${s.name} — persentil ke-${getPercentile(s.total)}</span></div>`).join('');
+
+  // ── Insight Summary ──
+  const mtkWinner  = activeSl.reduce((a,b)=>a.mtk>b.mtk?a:b);
+  const mtkTie     = activeSl.every(s=>s.mtk===activeSl[0].mtk);
+  const biWinner   = activeSl.reduce((a,b)=>a.bi>b.bi?a:b);
+  const biTie      = activeSl.every(s=>s.bi===activeSl[0].bi);
+  const totWinner  = activeSl.reduce((a,b)=>a.total>b.total?a:b);
+  const totTie     = activeSl.every(s=>s.total===activeSl[0].total);
+
+  document.getElementById('cmp-summary').innerHTML = `
+    <div class="cmp-insight-box">
+      <div class="cmp-insight-card">
+        <div class="cmp-insight-label">🏆 Unggul MTK</div>
+        <div class="cmp-insight-val" style="color:var(--accent);font-size:13px;word-break:break-word">${mtkTie?'SERI':mtkWinner.name.split(' ').slice(0,2).join(' ')}</div>
+        ${!mtkTie?`<div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:3px">${mtkWinner.mtk}</div>`:''}
+      </div>
+      <div class="cmp-insight-card">
+        <div class="cmp-insight-label">🏆 Unggul BI</div>
+        <div class="cmp-insight-val" style="color:var(--accent2);font-size:13px;word-break:break-word">${biTie?'SERI':biWinner.name.split(' ').slice(0,2).join(' ')}</div>
+        ${!biTie?`<div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:3px">${biWinner.bi}</div>`:''}
+      </div>
+      <div class="cmp-insight-card">
+        <div class="cmp-insight-label">⭐ Unggul Total TKA</div>
+        <div class="cmp-insight-val" style="color:var(--gold);font-size:13px;word-break:break-word">${totTie?'SERI':totWinner.name.split(' ').slice(0,2).join(' ')}</div>
+        ${!totTie?`<div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:3px">${totWinner.total.toFixed(2)}</div>`:''}
+      </div>
+      ${activeSl.map((s,i)=>`<div class="cmp-insight-card">
+        <div class="cmp-insight-label">📊 Persentil ${CMP_LABELS[i]}</div>
+        <div class="cmp-insight-val" style="color:${CMP_COLORS[i]}">ke-${getPercentile(s.total)}</div>
+        <div style="font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:3px;word-break:break-word">${s.name.split(' ')[0]}</div>
+      </div>`).join('')}
+    </div>
+  `;
+
+  result.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// Close dropdowns on outside click
+document.addEventListener('click', e=>{
+  for(let i=0;i<4;i++){
+    const wrap = document.getElementById('cmp-wrap-'+i);
+    if(wrap && !wrap.contains(e.target)){
+      const dd = document.getElementById('cmp-dd-'+i);
+      if(dd){ dd.classList.remove('open'); dd.innerHTML=''; }
+    }
+  }
+});
+
+// ── SEARCH CLEAR BUTTONS ──
+function clearSearch(type) {
+  if (type === 'name') {
+    document.getElementById('search-name').value = '';
+    document.getElementById('clear-name').style.display = 'none';
+  } else {
+    document.getElementById('search-nomor').value = '';
+    document.getElementById('clear-nomor').style.display = 'none';
+  }
+  document.getElementById('search-result-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  hidePicker();
+  applyFilters();
+}
+
+document.getElementById('search-name').addEventListener('input', function(){
+  document.getElementById('clear-name').style.display = this.value ? 'flex' : 'none';
+});
+document.getElementById('search-nomor').addEventListener('input', function(){
+  document.getElementById('clear-nomor').style.display = this.value ? 'flex' : 'none';
+});
+
+// Init
+renderTable();
+</script>
+</body>
+</html>
